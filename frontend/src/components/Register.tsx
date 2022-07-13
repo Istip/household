@@ -31,7 +31,7 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Box>
+    <Flex align="center" justify="center" h="100vh" flexDirection="column">
       <Flex align="center" justify="center">
         <Text fontSize="4xl">Register</Text>
       </Flex>
@@ -90,7 +90,7 @@ const Register: React.FC = () => {
           </Box>
         </Flex>
       </Box>
-    </Box>
+    </Flex>
   );
 };
 
