@@ -11,6 +11,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
+import { Link } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const [data, setData] = useState({
@@ -90,6 +91,14 @@ const Register: React.FC = () => {
                 <Button colorScheme="gray" w="100%" type="submit">
                   Register
                 </Button>
+              </Box>
+
+              <Box pt={4}>
+                <Flex align="center" justify="center" color="blue.200">
+                  <b>
+                    <Link to="/login">Already registered member?</Link>
+                  </b>
+                </Flex>
               </Box>
             </form>
           </Box>
