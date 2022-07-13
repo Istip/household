@@ -10,6 +10,7 @@ import {
   Box,
   Flex,
 } from '@chakra-ui/react';
+import { useAuth } from '../context/AuthContext';
 
 const Register: React.FC = () => {
   const [data, setData] = useState({
@@ -17,6 +18,10 @@ const Register: React.FC = () => {
     email: '',
     password: '',
   });
+
+  const { user } = useAuth();
+
+  console.log(user);
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
