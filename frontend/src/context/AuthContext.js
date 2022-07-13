@@ -7,10 +7,12 @@ export const AuthContextProvider = (props) => {
 
   const login = () => {
     setUser(true);
+    console.log('✅ Logged in!');
   };
 
   const logout = () => {
     setUser(false);
+    console.log('❌ Logged out!');
   };
 
   return (
