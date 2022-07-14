@@ -49,6 +49,7 @@ const Register: React.FC = () => {
                 <FormControl isRequired>
                   <FormLabel htmlFor="name">First name</FormLabel>
                   <Input
+                    autoComplete="off"
                     name="name"
                     type="text"
                     id="name"
@@ -65,6 +66,7 @@ const Register: React.FC = () => {
                 <FormControl isRequired>
                   <FormLabel htmlFor="email">Email</FormLabel>
                   <Input
+                    autoComplete="off"
                     name="email"
                     type="email"
                     id="email"
@@ -78,6 +80,7 @@ const Register: React.FC = () => {
                 <FormControl isRequired>
                   <FormLabel htmlFor="password">Password</FormLabel>
                   <Input
+                    autoComplete="off"
                     name="password"
                     type="password"
                     id="password"
