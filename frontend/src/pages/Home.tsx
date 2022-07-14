@@ -1,67 +1,47 @@
 import {
-  Button,
-  Flex,
+  Tab,
+  TabList,
+  TabPanel,
+  TabPanels,
+  Tabs,
   Text,
-  Popover,
-  PopoverTrigger,
-  PopoverContent,
-  PopoverBody,
-  PopoverArrow,
-  PopoverCloseButton,
 } from '@chakra-ui/react';
-import axios from '../helpers/axios';
-import { useAuth } from '../context/AuthContext';
+import Footer from '../components/Footer';
+import Navbar from '../components/Navbar';
 
 const Home: React.FC = () => {
-  const { user, logout } = useAuth();
-
-  const getMe = () => {
-    axios.get(`/users/me`).then((res) => {
-      console.log(res.data);
-    });
-  };
-
   return (
-    <Flex alignItems="center" justify="center" flexDirection="column" h="100vh">
-      <Text fontSize="5xl">Hi!</Text>
-      <Text fontSize="md">If you see this, that means you are logged in!</Text>
-
-      <br />
-
-      <Button onClick={logout}>Logout</Button>
-
-      <br />
-
-      <Button colorScheme="red" onClick={getMe}>
-        Get profile endpoint
-      </Button>
-
-      <br />
-
-      <Popover>
-        <PopoverTrigger>
-          <Button colorScheme="blue">Show User Data</Button>
-        </PopoverTrigger>
-        <PopoverContent>
-          <PopoverArrow />
-          <PopoverCloseButton />
-          <PopoverBody>
-            <Text size="sm">
-              <b>Name: </b>
-              {user!.name}
+    <>
+      <Navbar />
+      <Tabs isFitted variant="enclosed-colored">
+        <TabList mb="1em">
+          <Tab>
+            <Text fontSize="sm" fontWeight="bold">
+              SHOPPING
             </Text>
-            <Text size="sm">
-              <b>Email: </b>
-              {user!.email}
+          </Tab>
+          <Tab>
+            <Text fontSize="sm" fontWeight="bold">
+              NOTES
             </Text>
-            <Text size="sm">
-              <b>ID: </b>
-              {user!._id}
+          </Tab>
+        </TabList>
+
+        <TabPanels>
+          <TabPanel>
+            <Text fontSize="xl" fontWeight="bold">
+              Shopping list goes here
             </Text>
-          </PopoverBody>
-        </PopoverContent>
-      </Popover>
-    </Flex>
+          </TabPanel>
+          <TabPanel>
+            <Text fontSize="xl" fontWeight="bold">
+              Notes goes here
+            </Text>
+          </TabPanel>
+        </TabPanels>
+      </Tabs>
+      <Footer />
+    </>
   );
 };
 
