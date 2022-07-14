@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import {
   FormControl,
   FormLabel,
@@ -8,19 +7,22 @@ import {
   Text,
   Box,
   Flex,
+  InputRightElement,
+  InputGroup,
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const [data, setData] = useState({
     email: '',
     password: '',
   });
+  const [show, setShow] = useState(false);
 
-  const { user } = useAuth();
+  const { login } = useAuth();
 
-  console.log(user);
+  const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -29,9 +31,11 @@ const Register: React.FC = () => {
     });
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, data);
+    await login(data);
+
+    navigate('/');
   };
 
   return (
@@ -47,11 +51,11 @@ const Register: React.FC = () => {
                 <FormControl isRequired>
                   <FormLabel htmlFor="email">Email</FormLabel>
                   <Input
-                    autoComplete="off"
+                    autoComplete="on"
                     name="email"
                     type="email"
                     id="email"
-                    placeholder="Enter your email address"
+                    placeholder="Enter your email"
                     onChange={onChange}
                   />
                 </FormControl>
@@ -60,14 +64,25 @@ const Register: React.FC = () => {
               <Box px={4}>
                 <FormControl isRequired>
                   <FormLabel htmlFor="password">Password</FormLabel>
-                  <Input
-                    autoComplete="off"
-                    name="password"
-                    type="password"
-                    id="password"
-                    placeholder="First name"
-                    onChange={onChange}
-                  />
+                  <InputGroup>
+                    <Input
+                      autoComplete="on"
+                      name="password"
+                      type={show ? 'text' : 'password'}
+                      id="password"
+                      placeholder="Enter your password"
+                      onChange={onChange}
+                    />
+                    <InputRightElement width="4.5rem">
+                      <Button
+                        h="1.75rem"
+                        size="sm"
+                        onClick={() => setShow(!show)}
+                      >
+                        {show ? 'Hide' : 'Show'}
+                      </Button>
+                    </InputRightElement>
+                  </InputGroup>
                 </FormControl>
               </Box>
 

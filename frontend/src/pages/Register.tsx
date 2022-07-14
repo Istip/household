@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import axios from 'axios';
 import {
   FormControl,
   FormLabel,
@@ -11,7 +10,7 @@ import {
   Flex,
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Register: React.FC = () => {
   const [data, setData] = useState({
@@ -20,9 +19,9 @@ const Register: React.FC = () => {
     password: '',
   });
 
-  const { user } = useAuth();
+  const { register } = useAuth();
 
-  console.log(user);
+  const navigate = useNavigate();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -31,9 +30,11 @@ const Register: React.FC = () => {
     });
   };
 
-  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    axios.post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, data);
+    await register(data);
+
+    navigate('/');
   };
 
   return (
@@ -56,7 +57,7 @@ const Register: React.FC = () => {
                     placeholder="Enter your name"
                     onChange={onChange}
                   />
-                  <FormHelperText>
+                  <FormHelperText color="gray.300">
                     Even a short nickname will be enough!
                   </FormHelperText>
                 </FormControl>
@@ -84,7 +85,7 @@ const Register: React.FC = () => {
                     name="password"
                     type="password"
                     id="password"
-                    placeholder="First name"
+                    placeholder="Enter your password"
                     onChange={onChange}
                   />
                 </FormControl>
