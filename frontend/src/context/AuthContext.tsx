@@ -1,5 +1,5 @@
 import axios from 'axios';
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 interface User {
   _id: string;
@@ -15,7 +15,7 @@ interface IProps {
 const AuthContext = createContext<any>(null);
 
 export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
-  const [user, setUser] = useState<User | null>(null);
+  const [user, setUser] = useState<User | string | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [authReady, setAuthReady] = useState(false);
@@ -32,7 +32,10 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, data)
       .then((res) => {
-        setUser(res.data);
+        const user = res.data;
+
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
         setAuthReady(true);
       })
       .catch((err) => {
@@ -51,7 +54,10 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/users/login`, data)
       .then((res) => {
-        setUser(res.data);
+        const user = res.data;
+
+        localStorage.setItem('user', JSON.stringify(user));
+        setUser(user);
         setAuthReady(true);
       })
       .catch((err) => {
@@ -63,9 +69,18 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
   };
 
   const logout = () => {
-    console.log('❌ Logged out!');
+    localStorage.removeItem('user');
     setUser(null);
   };
+
+  useEffect(() => {
+    const authed = localStorage.getItem('user');
+
+    if (!user && typeof authed === 'string') {
+      const data = JSON.parse(authed);
+      setUser(data);
+    }
+  }, [user]);
 
   return (
     <AuthContext.Provider
