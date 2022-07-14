@@ -9,22 +9,16 @@ import {
   PopoverArrow,
   PopoverCloseButton,
 } from '@chakra-ui/react';
-import axios from 'axios';
+import axios from '../helpers/axios';
 import { useAuth } from '../context/AuthContext';
 
 const Home: React.FC = () => {
   const { user, logout } = useAuth();
 
   const getMe = () => {
-    const config = {
-      headers: { Authorization: `Bearer ${user!.token}` },
-    };
-
-    axios
-      .get(`${process.env.REACT_APP_BACKEND_URL}/api/users/me`, config)
-      .then((res) => {
-        console.log(res.data);
-      });
+    axios.get(`/users/me`).then((res) => {
+      console.log(res.data);
+    });
   };
 
   return (

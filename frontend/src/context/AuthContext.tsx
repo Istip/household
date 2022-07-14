@@ -1,5 +1,5 @@
-import axios from 'axios';
-import React, { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
+import axios from '../helpers/axios';
 
 interface IState {
   user: {
@@ -36,7 +36,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setAuthReady(false);
 
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, data)
+      .post('/users', data)
       .then((res) => {
         const response = res.data;
 
@@ -58,7 +58,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setAuthReady(false);
 
     axios
-      .post(`${process.env.REACT_APP_BACKEND_URL}/api/users/login`, data)
+      .post('/users/login', data)
       .then((res) => {
         const response = res.data;
 
