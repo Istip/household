@@ -18,6 +18,7 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
+  const [authReady, setAuthReady] = useState(false);
 
   const register = (data: {
     name: string;
@@ -26,14 +27,16 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
   }) => {
     setLoading(true);
     setError('');
+    setAuthReady(false);
 
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, data)
       .then((res) => {
         setUser(res.data);
+        setAuthReady(true);
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.response.data.message);
       })
       .finally(() => {
         setLoading(false);
@@ -43,14 +46,16 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
   const login = (data: { email: string; password: string }) => {
     setLoading(true);
     setError('');
+    setAuthReady(false);
 
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/users/login`, data)
       .then((res) => {
         setUser(res.data);
+        setAuthReady(true);
       })
       .catch((err) => {
-        setError(err.message);
+        setError(err.response.data.message);
       })
       .finally(() => {
         setLoading(false);
@@ -64,7 +69,7 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, error, login, logout, register }}
+      value={{ user, loading, error, login, logout, register, authReady }}
     >
       {children}
     </AuthContext.Provider>

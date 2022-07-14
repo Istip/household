@@ -11,6 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
 import { Link, useNavigate } from 'react-router-dom';
+import ErrorMessage from '../components/ErrorMessage';
 
 const Register: React.FC = () => {
   const [data, setData] = useState({
@@ -19,7 +20,7 @@ const Register: React.FC = () => {
     password: '',
   });
 
-  const { register } = useAuth();
+  const { register, error, loading, authReady } = useAuth();
 
   const navigate = useNavigate();
 
@@ -34,13 +35,15 @@ const Register: React.FC = () => {
     e.preventDefault();
     await register(data);
 
-    navigate('/');
+    if (authReady) {
+      navigate('/');
+    }
   };
 
   return (
     <Flex align="center" justify="center" h="100vh" flexDirection="column">
       <Flex align="center" justify="center">
-        <Text fontSize="4xl">Register</Text>
+        <Text fontSize="4xl">Registration</Text>
       </Flex>
       <Box w="100%">
         <Flex align="center" justify="center">
@@ -92,10 +95,21 @@ const Register: React.FC = () => {
               </Box>
 
               <Box w="100%" pt={8} px={4}>
-                <Button colorScheme="gray" w="100%" type="submit">
-                  Register
+                <Button
+                  colorScheme="gray"
+                  w="100%"
+                  type="submit"
+                  isLoading={loading}
+                >
+                  Create account
                 </Button>
               </Box>
+
+              {error && (
+                <Box p={4}>
+                  <ErrorMessage>{error}</ErrorMessage>
+                </Box>
+              )}
 
               <Box pt={4}>
                 <Flex align="center" justify="center" color="blue.200">

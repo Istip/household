@@ -1,4 +1,9 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
 import Home from './pages/Home';
@@ -10,9 +15,20 @@ function App() {
   return (
     <Router>
       <Routes>
-        {user && <Route path="/" element={<Home />} />}
-        <Route path="/register" element={<Register />} />
-        <Route path="/login" element={<Login />} />
+        <Route
+          path="/"
+          element={user ? <Home /> : <Navigate replace to="/login" />}
+        />
+        <Route
+          path="/register"
+          element={!user ? <Register /> : <Navigate replace to="/" />}
+        />
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate replace to="/" />}
+        />
+
+        <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </Router>
   );
