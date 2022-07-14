@@ -7,7 +7,9 @@ import {
   Text,
 } from '@chakra-ui/react';
 import Footer from '../components/Footer';
+import ItemsList from '../components/items/ItemsList';
 import Navbar from '../components/Navbar';
+import ItemProvider from '../context/ItemContext';
 
 const Home: React.FC = () => {
   return (
@@ -29,9 +31,9 @@ const Home: React.FC = () => {
 
         <TabPanels>
           <TabPanel>
-            <Text fontSize="xl" fontWeight="bold">
-              Shopping list goes here
-            </Text>
+            <ItemProvider>
+              <ItemsList />
+            </ItemProvider>
           </TabPanel>
           <TabPanel>
             <Text fontSize="xl" fontWeight="bold">
