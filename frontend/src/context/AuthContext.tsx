@@ -1,21 +1,27 @@
 import axios from 'axios';
 import React, { createContext, useContext, useEffect, useState } from 'react';
 
-interface User {
-  _id: string;
-  name: string;
-  email: string;
-  token: string;
+interface IState {
+  user: {
+    _id: string;
+    name: string;
+    email: string;
+    token: string;
+  } | null;
+  login: (data: { email: string; password: string }) => void;
+  register: (data: { name: string; email: string; password: string }) => void;
+  logout: () => void;
+  loading: boolean;
+  authReady: boolean;
+  error: string;
 }
 
-interface IProps {
-  children: React.ReactNode;
-}
+const AuthContext = createContext({} as IState);
 
-const AuthContext = createContext<any>(null);
-
-export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
-  const [user, setUser] = useState<User | string | null>(null);
+export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
+  children,
+}) => {
+  const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [authReady, setAuthReady] = useState(false);
@@ -32,10 +38,10 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/users`, data)
       .then((res) => {
-        const user = res.data;
+        const response = res.data;
 
-        localStorage.setItem('user', JSON.stringify(user));
-        setUser(user);
+        localStorage.setItem('user', JSON.stringify(response));
+        setUser(response);
         setAuthReady(true);
       })
       .catch((err) => {
@@ -54,10 +60,10 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
     axios
       .post(`${process.env.REACT_APP_BACKEND_URL}/api/users/login`, data)
       .then((res) => {
-        const user = res.data;
+        const response = res.data;
 
-        localStorage.setItem('user', JSON.stringify(user));
-        setUser(user);
+        localStorage.setItem('user', JSON.stringify(response));
+        setUser(response);
         setAuthReady(true);
       })
       .catch((err) => {
@@ -84,7 +90,7 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, error, login, logout, register, authReady }}
+      value={{ user, login, register, logout, loading, authReady, error }}
     >
       {children}
     </AuthContext.Provider>
@@ -92,13 +98,7 @@ export const AuthContextProvider: React.FC<IProps> = ({ children }) => {
 };
 
 export const useAuth = () => {
-  const user = useContext(AuthContext);
-
-  if (!user) {
-    throw new Error('useAuth must be used within a AuthContextProvider');
-  }
-
-  return user;
+  return useContext(AuthContext);
 };
 
 export default AuthContextProvider;

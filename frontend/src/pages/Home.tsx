@@ -1,5 +1,7 @@
-import { Button, Flex, Text } from '@chakra-ui/react';
 import {
+  Button,
+  Flex,
+  Text,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -15,7 +17,7 @@ const Home: React.FC = () => {
 
   const getMe = () => {
     const config = {
-      headers: { Authorization: `Bearer ${user.token}` },
+      headers: { Authorization: `Bearer ${user!.token}` },
     };
 
     axios
@@ -52,15 +54,15 @@ const Home: React.FC = () => {
           <PopoverBody>
             <Text size="sm">
               <b>Name: </b>
-              {user.name}
+              {user!.name}
             </Text>
             <Text size="sm">
               <b>Email: </b>
-              {user.email}
+              {user!.email}
             </Text>
             <Text size="sm">
               <b>ID: </b>
-              {user._id}
+              {user!._id}
             </Text>
           </PopoverBody>
         </PopoverContent>
