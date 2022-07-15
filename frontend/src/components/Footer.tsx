@@ -1,6 +1,10 @@
 import { Box, Button, Input } from '@chakra-ui/react';
 
-const Footer: React.FC = () => {
+interface Props {
+  tabIndex: number;
+}
+
+const Footer: React.FC<Props> = ({ tabIndex }) => {
   return (
     <Box
       position="fixed"
@@ -12,15 +16,22 @@ const Footer: React.FC = () => {
       justifyContent="space-between"
       alignItems="center"
       p={2}
+      h="60px"
       borderTop="1px solid"
       borderColor="gray.200"
     >
-      <Box>
-        <Input placeholder="Enter item to buy" bg="white" />
-      </Box>
-      <Box>
-        <Button colorScheme="blue">Create</Button>
-      </Box>
+      {tabIndex === 0 ? (
+        <>
+          <Box>
+            <Input placeholder="Enter item to buy" bg="white" />
+          </Box>
+          <Box>
+            <Button colorScheme="blue">Create</Button>
+          </Box>
+        </>
+      ) : (
+        <Box>Valami mas</Box>
+      )}
     </Box>
   );
 };
