@@ -13,9 +13,11 @@ const Item: React.FC<IProps> = ({ item }) => {
     <Box
       p={5}
       border="1px solid"
-      borderColor="gray.200"
       borderRadius={10}
       mb={2}
+      borderColor={item.completed ? 'gray.300' : 'gray.400'}
+      opacity={item.completed ? '0.5' : '1'}
+      backgroundColor={item.completed ? 'white' : 'gray.50'}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box fontWeight="bold" ml={1}>
@@ -36,23 +38,12 @@ const Item: React.FC<IProps> = ({ item }) => {
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Avatar name={user!.name} size="2xs" />
 
-        <Box>
-          <Text
-            fontSize="xs"
-            fontWeight="bold"
-            color={item.completed ? 'green.400' : 'red.400'}
-            mr={1}
-          >
-            {item.completed ? 'COMPLETED' : 'INCOMPLETE'}
-          </Text>
-        </Box>
-
         <Text fontSize="xs">
           <Text fontSize="xs" as="span" color="gray.400" mr={1}>
             <i className="fa-solid fa-clock"></i>
           </Text>
           <Text fontSize="xs" as="span" color="gray.400" mr={1}>
-            {dayjs(item.createdAt).format('MMMM DD : HH:mm')}
+            {dayjs(item.createdAt).format('MMMM DD - HH:mm')}
           </Text>
         </Text>
       </Box>
