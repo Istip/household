@@ -21,7 +21,7 @@ const Item: React.FC<IProps> = ({ item }) => {
   const [text, setText] = useState(item.name);
 
   const { updateItem, deleteItem, loading } = useItems();
-  const { completed, _id, name, createdAt, createdBy } = item;
+  const { completed, _id, name, createdAt, createdBy, updatedAt } = item;
 
   const toast = useToast();
 
@@ -104,27 +104,40 @@ const Item: React.FC<IProps> = ({ item }) => {
       <Box my={3}>
         <Divider />
       </Box>
-      <Box display="flex" alignItems="center" justifyContent="flex-end">
-        <Text
-          alignSelf="center"
-          fontSize="xs"
-          as="span"
-          color="gray.400"
-          mr={1}
-        >
-          <i className="fa-solid fa-clock"></i>
-        </Text>
+      <Box display="flex" alignItems="center" justifyContent="space-between">
+        <Box>
+          {createdAt !== updatedAt ? (
+            <Text fontSize="xs" fontWeight="light" color="telegram.300">
+              <i className="fa-solid fa-square-pen"></i>{' '}
+              {dayjs(updatedAt).format('MMMM DD HH:mm')}
+            </Text>
+          ) : (
+            ''
+          )}
+        </Box>
 
-        <Text
-          alignSelf="center"
-          fontSize="xs"
-          as="span"
-          color="gray.400"
-          mr={2}
-        >
-          {dayjs(createdAt).format('MMMM DD - HH:mm')}
-        </Text>
-        <Avatar name={createdBy} size="2xs" fontWeight="bold" />
+        <Box display="flex" alignItems="center" justifyContent="flex-end">
+          <Text
+            alignSelf="center"
+            fontSize="xs"
+            as="span"
+            color="gray.400"
+            mr={1}
+          >
+            <i className="fa-solid fa-clock"></i>
+          </Text>
+
+          <Text
+            alignSelf="center"
+            fontSize="xs"
+            as="span"
+            color="gray.400"
+            mr={2}
+          >
+            {dayjs(createdAt).format('MMMM DD - HH:mm')}
+          </Text>
+          <Avatar name={createdBy} size="2xs" fontWeight="bold" />
+        </Box>
       </Box>
     </Box>
   );

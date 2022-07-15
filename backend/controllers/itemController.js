@@ -6,7 +6,7 @@ const Item = require('../models/itemModel');
 // @route /api/items
 // @access PRIVATE
 const getItems = asyncHandler(async (req, res) => {
-  const items = await Item.find();
+  const items = await Item.find().sort({ createdAt: -1 });
 
   res.status(200).json(items);
 });
