@@ -7,8 +7,8 @@ import {
 } from 'react-router-dom';
 import Register from './pages/Register';
 import Login from './pages/Login';
+import Spin from './components/Spin';
 import { useAuth } from './context/AuthContext';
-import { Spinner } from '@chakra-ui/react';
 
 const Home = lazy(() => import('./pages/Home'));
 
@@ -17,17 +17,7 @@ function App() {
 
   return (
     <Router>
-      <Suspense
-        fallback={
-          <Spinner
-            thickness="4px"
-            speed="0.65s"
-            emptyColor="gray.200"
-            color="gray.500"
-            size="xl"
-          />
-        }
-      >
+      <Suspense fallback={<Spin />}>
         <Routes>
           <Route
             path="/"

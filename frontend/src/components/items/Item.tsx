@@ -1,13 +1,28 @@
 import { Avatar, Box, Button, Divider, Text } from '@chakra-ui/react';
 import { useAuth } from '../../context/AuthContext';
+import { useItems } from '../../context/ItemContext';
 import { Item as IItem } from '../../interfaces/Item';
 import dayjs from 'dayjs';
+import ErrorMessage from '../ErrorMessage';
 
 interface IProps {
   item: IItem;
 }
 const Item: React.FC<IProps> = ({ item }) => {
+  const { completeItem, deleteItem, loading, error } = useItems();
   const { user } = useAuth();
+  const { completed, _id, name, createdAt } = item;
+
+  const handleComplete = () => {
+    const data = {
+      completed: !completed,
+    };
+    completeItem(_id, data);
+  };
+
+  const handleDelete = () => {
+    deleteItem(_id);
+  };
 
   return (
     <Box
@@ -15,19 +30,29 @@ const Item: React.FC<IProps> = ({ item }) => {
       border="1px solid"
       borderRadius={10}
       mb={2}
-      borderColor={item.completed ? 'gray.300' : 'gray.400'}
-      opacity={item.completed ? '0.5' : '1'}
-      backgroundColor={item.completed ? 'white' : 'gray.50'}
+      borderColor={completed ? 'gray.300' : 'gray.400'}
+      opacity={completed ? '0.5' : '1'}
+      backgroundColor={completed ? 'white' : 'gray.50'}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Box fontWeight="bold" ml={1}>
-          {item.name}
+          {name}
         </Box>
         <Box fontSize="sm" display="flex" gap={1}>
-          <Button colorScheme="red" size="sm">
+          <Button
+            colorScheme="red"
+            size="sm"
+            onClick={handleDelete}
+            isLoading={loading}
+          >
             <i className="fa-solid fa-trash"></i>
           </Button>
-          <Button colorScheme="green" size="sm">
+          <Button
+            colorScheme="green"
+            size="sm"
+            onClick={handleComplete}
+            isLoading={loading}
+          >
             <i className="fa-solid fa-circle-check"></i>
           </Button>
         </Box>
@@ -43,10 +68,16 @@ const Item: React.FC<IProps> = ({ item }) => {
             <i className="fa-solid fa-clock"></i>
           </Text>
           <Text fontSize="xs" as="span" color="gray.400" mr={1}>
-            {dayjs(item.createdAt).format('MMMM DD - HH:mm')}
+            {dayjs(createdAt).format('MMMM DD - HH:mm')}
           </Text>
         </Text>
       </Box>
+
+      {error && (
+        <Box mt={2}>
+          <ErrorMessage>{error}</ErrorMessage>
+        </Box>
+      )}
     </Box>
   );
 };
