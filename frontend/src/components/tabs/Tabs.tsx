@@ -6,7 +6,7 @@ import {
   Tabs as TabsWrapper,
   Text,
 } from '@chakra-ui/react';
-import { ItemsList } from '../';
+import { ItemsList, NotesList } from '../';
 
 interface Props {
   tabIndex: number;
@@ -43,9 +43,7 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
           <ItemsList />
         </TabPanel>
         <TabPanel>
-          <Text fontSize="xl" fontWeight="bold">
-            Notes goes here
-          </Text>
+          <NotesList />
         </TabPanel>
       </TabPanels>
     </TabsWrapper>
