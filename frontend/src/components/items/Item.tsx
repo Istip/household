@@ -63,6 +63,7 @@ const Item: React.FC<IProps> = ({ item }) => {
   return (
     <Box
       p={5}
+      pb={3}
       border="1px solid"
       borderRadius={10}
       mb={2}
