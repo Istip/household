@@ -6,9 +6,7 @@ import {
   Tabs,
   Text,
 } from '@chakra-ui/react';
-import Footer from '../components/Footer';
-import ItemsList from '../components/items/ItemsList';
-import Navbar from '../components/Navbar';
+import { Footer, ItemsList, Navbar } from '../components';
 import ItemProvider from '../context/ItemContext';
 
 const Home: React.FC = () => {

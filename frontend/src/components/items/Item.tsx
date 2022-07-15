@@ -1,23 +1,21 @@
 import { Avatar, Box, Button, Divider, Text } from '@chakra-ui/react';
-import { useAuth } from '../../context/AuthContext';
 import { useItems } from '../../context/ItemContext';
 import { Item as IItem } from '../../interfaces/Item';
+import { ErrorMessage } from '../';
 import dayjs from 'dayjs';
-import ErrorMessage from '../ErrorMessage';
 
 interface IProps {
   item: IItem;
 }
 const Item: React.FC<IProps> = ({ item }) => {
-  const { completeItem, deleteItem, loading, error } = useItems();
-  const { user } = useAuth();
-  const { completed, _id, name, createdAt } = item;
+  const { updateItem, deleteItem, loading, error } = useItems();
+  const { completed, _id, name, createdAt, createdBy } = item;
 
   const handleComplete = () => {
     const data = {
       completed: !completed,
     };
-    completeItem(_id, data);
+    updateItem(_id, data);
   };
 
   const handleDelete = () => {
@@ -61,7 +59,7 @@ const Item: React.FC<IProps> = ({ item }) => {
         <Divider />
       </Box>
       <Box display="flex" alignItems="center" justifyContent="space-between">
-        <Avatar name={user!.name} size="2xs" />
+        <Avatar name={createdBy} size="2xs" />
 
         <Text fontSize="xs">
           <Text fontSize="xs" as="span" color="gray.400" mr={1}>

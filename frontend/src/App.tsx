@@ -5,9 +5,8 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
-import Register from './pages/Register';
-import Login from './pages/Login';
-import Spin from './components/Spin';
+import { Register, Login } from './pages/';
+import { Spin } from './components/';
 import { useAuth } from './context/AuthContext';
 
 const Home = lazy(() => import('./pages/Home'));

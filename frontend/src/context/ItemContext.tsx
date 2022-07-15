@@ -7,7 +7,7 @@ interface IState {
   setItems: React.Dispatch<React.SetStateAction<Item[] | []>>;
   loading: boolean;
   error: string;
-  completeItem: (id: string, data: object) => void;
+  updateItem: (id: string, data: object) => void;
   deleteItem: (id: string) => void;
 }
 
@@ -26,7 +26,7 @@ export const ItemProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
 
-  const completeItem = (id: string, data: object) => {
+  const updateItem = (id: string, data: object) => {
     setLoading(true);
     setError('');
 
@@ -76,7 +76,7 @@ export const ItemProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <ItemContext.Provider
-      value={{ items, setItems, loading, error, completeItem, deleteItem }}
+      value={{ items, setItems, loading, error, updateItem, deleteItem }}
     >
       {children}
     </ItemContext.Provider>

@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import {
   FormControl,
   FormLabel,
@@ -11,8 +12,7 @@ import {
   InputGroup,
 } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
-import { Link, useNavigate } from 'react-router-dom';
-import ErrorMessage from '../components/ErrorMessage';
+import { ErrorMessage } from '../components';
 
 const Register: React.FC = () => {
   const [data, setData] = useState({

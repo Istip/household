@@ -1,6 +1,6 @@
 import { Box } from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
-import Item from './Item';
+import { Item } from '../';
 
 const ItemsList: React.FC = () => {
   const { items } = useItems();
