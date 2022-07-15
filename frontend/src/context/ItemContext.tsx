@@ -9,6 +9,12 @@ interface IState {
   error: string;
   updateItem: (id: string, data: object) => void;
   deleteItem: (id: string) => void;
+  createItem: (data: NewItem) => void;
+}
+
+interface NewItem {
+  name: string;
+  createdBy: string;
 }
 
 const ItemContext = createContext({} as IState);
@@ -50,6 +56,24 @@ export const ItemProvider: React.FC<{ children: React.ReactNode }> = ({
       });
   };
 
+  const createItem = (data: NewItem) => {
+    setLoading(true);
+    setError('');
+
+    axios
+      .post('/items', data)
+      .then((res) => {
+        setItems((prevItems) => [res.data, ...prevItems]);
+      })
+      .catch((err) => {
+        setError(err.response.data.message);
+      })
+      .finally(() => {
+        setLoading(false);
+        console.log(items);
+      });
+  };
+
   const deleteItem = (id: string) => {
     setLoading(true);
     setError('');
@@ -76,7 +100,15 @@ export const ItemProvider: React.FC<{ children: React.ReactNode }> = ({
 
   return (
     <ItemContext.Provider
-      value={{ items, setItems, loading, error, updateItem, deleteItem }}
+      value={{
+        items,
+        setItems,
+        loading,
+        error,
+        updateItem,
+        deleteItem,
+        createItem,
+      }}
     >
       {children}
     </ItemContext.Provider>

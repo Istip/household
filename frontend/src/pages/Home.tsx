@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Footer, Navbar, Tabs } from '../components';
+import ItemProvider from '../context/ItemContext';
 
 const Home: React.FC = () => {
   const [tabIndex, setTabIndex] = useState(0);
@@ -7,8 +8,10 @@ const Home: React.FC = () => {
   return (
     <>
       <Navbar />
-      <Tabs tabIndex={tabIndex} setTabIndex={setTabIndex} />
-      <Footer tabIndex={tabIndex} />
+      <ItemProvider>
+        <Tabs tabIndex={tabIndex} setTabIndex={setTabIndex} />
+        <Footer tabIndex={tabIndex} />
+      </ItemProvider>
     </>
   );
 };
