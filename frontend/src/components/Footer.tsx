@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Box, Button, Input } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
 import { useItems } from '../context/ItemContext';
-import { ErrorMessage } from './';
 
 interface Props {
   tabIndex: number;
@@ -10,7 +9,7 @@ interface Props {
 
 const Footer: React.FC<Props> = ({ tabIndex }) => {
   const [text, setText] = useState('');
-  const { createItem, loading, error } = useItems();
+  const { createItem, loading } = useItems();
   const { user } = useAuth();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -61,12 +60,6 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
             </Button>
           </Box>
         </>
-
-        {error && (
-          <Box mt={2}>
-            <ErrorMessage>{error}</ErrorMessage>
-          </Box>
-        )}
       </Box>
     </form>
   );

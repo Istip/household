@@ -1,14 +1,13 @@
 import { Avatar, Box, Button, Divider, Text } from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
 import { Item as IItem } from '../../interfaces/Item';
-import { ErrorMessage } from '../';
 import dayjs from 'dayjs';
 
 interface IProps {
   item: IItem;
 }
 const Item: React.FC<IProps> = ({ item }) => {
-  const { updateItem, deleteItem, loading, error } = useItems();
+  const { updateItem, deleteItem, loading } = useItems();
   const { completed, _id, name, createdAt, createdBy } = item;
 
   const handleComplete = () => {
@@ -70,12 +69,6 @@ const Item: React.FC<IProps> = ({ item }) => {
           </Text>
         </Text>
       </Box>
-
-      {error && (
-        <Box mt={2}>
-          <ErrorMessage>{error}</ErrorMessage>
-        </Box>
-      )}
     </Box>
   );
 };
