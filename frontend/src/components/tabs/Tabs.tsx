@@ -16,7 +16,16 @@ interface Props {
 const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
   return (
     <TabsWrapper isFitted variant="enclosed-colored" index={tabIndex}>
-      <TabList mb="1em">
+      <TabList
+        position="fixed"
+        left={0}
+        right={0}
+        top="72px"
+        zIndex={2}
+        pb={1}
+        mx={-1}
+        background="white"
+      >
         <Tab onClick={() => setTabIndex(0)}>
           <Text fontSize="sm" fontWeight="bold">
             SHOPPING
@@ -29,7 +38,7 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
         </Tab>
       </TabList>
 
-      <TabPanels>
+      <TabPanels mt="111px">
         <TabPanel>
           <ItemsList />
         </TabPanel>

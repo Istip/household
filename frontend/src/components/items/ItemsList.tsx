@@ -34,10 +34,6 @@ const ItemsList: React.FC = () => {
     // eslint-disable-next-line
   }, [searchText]);
 
-  if (!filteredItems.length) {
-    return null;
-  }
-
   return (
     <Box mb="60px">
       <InputGroup mb={2}>

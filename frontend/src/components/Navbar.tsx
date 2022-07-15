@@ -10,6 +10,11 @@ const Navbar = () => {
       alignItems="center"
       display="flex"
       background="gray.50"
+      position="fixed"
+      top={0}
+      right={0}
+      left={0}
+      zIndex={2}
     >
       <Box>
         <Text fontSize="md" color="blue.600" fontWeight="black">
