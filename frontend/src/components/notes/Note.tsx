@@ -63,7 +63,7 @@ const Note: React.FC<IProps> = ({ note }) => {
           />
         </Editable>
       ) : (
-        <Button w="100%" size="xs">
+        <Button w="100%" size="xs" my={1}>
           Add description
         </Button>
       )}
@@ -73,6 +73,7 @@ const Note: React.FC<IProps> = ({ note }) => {
         w="100%"
         size="sm"
         mt={3}
+        color="white"
         colorScheme="yellow"
       >
         DELETE
