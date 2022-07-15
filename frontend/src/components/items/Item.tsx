@@ -134,7 +134,7 @@ const Item: React.FC<IProps> = ({ item }) => {
             color="gray.400"
             mr={2}
           >
-            {dayjs(createdAt).format('MMMM DD - HH:mm')}
+            {dayjs(createdAt).format('MMMM DD HH:mm')}
           </Text>
           <Avatar name={createdBy} size="2xs" fontWeight="bold" />
         </Box>

@@ -29,7 +29,7 @@ const Navbar = () => {
           </Button>
         </Box>
         <Box>
-          <Avatar size="sm" name={user!.name} />
+          <Avatar size="sm" name={user!.name} fontWeight="black" />
         </Box>
       </Box>
     </Box>
