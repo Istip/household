@@ -32,6 +32,17 @@ const Item: React.FC<IProps> = ({ item }) => {
     updateItem(_id, data);
   };
 
+  const handleDelete = () => {
+    toast({
+      title: <Text fontSize="sm">Deleted: {name}</Text>,
+      position: 'top',
+      isClosable: true,
+      status: 'error',
+    });
+
+    deleteItem(_id);
+  };
+
   const handleUpdate = (name: string) => {
     if (text !== item.name && text !== '') {
       const data = {
@@ -41,19 +52,8 @@ const Item: React.FC<IProps> = ({ item }) => {
     }
 
     if (text === '') {
-      deleteItem(_id);
-
-      toast({
-        title: 'Item was deleted!',
-        position: 'top',
-        isClosable: true,
-        status: 'error',
-      });
+      handleDelete();
     }
-  };
-
-  const handleDelete = () => {
-    deleteItem(_id);
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
