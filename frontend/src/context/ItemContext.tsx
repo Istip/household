@@ -79,7 +79,6 @@ export const ItemProvider: React.FC<{ children: React.ReactNode }> = ({
       })
       .finally(() => {
         setLoading(false);
-        console.log(items);
       });
   };
 

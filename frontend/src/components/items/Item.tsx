@@ -1,14 +1,29 @@
-import { Avatar, Box, Button, Divider, Text } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Button,
+  Divider,
+  Editable,
+  EditableInput,
+  EditablePreview,
+  Text,
+  useToast,
+} from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
 import { Item as IItem } from '../../interfaces/Item';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 
 interface IProps {
   item: IItem;
 }
 const Item: React.FC<IProps> = ({ item }) => {
+  const [text, setText] = useState(item.name);
+
   const { updateItem, deleteItem, loading } = useItems();
   const { completed, _id, name, createdAt, createdBy } = item;
+
+  const toast = useToast();
 
   const handleComplete = () => {
     const data = {
@@ -17,8 +32,32 @@ const Item: React.FC<IProps> = ({ item }) => {
     updateItem(_id, data);
   };
 
+  const handleUpdate = (name: string) => {
+    if (text !== item.name && text !== '') {
+      const data = {
+        name,
+      };
+      updateItem(_id, data);
+    }
+
+    if (text === '') {
+      deleteItem(_id);
+
+      toast({
+        title: 'Item was deleted!',
+        position: 'top',
+        isClosable: true,
+        status: 'error',
+      });
+    }
+  };
+
   const handleDelete = () => {
     deleteItem(_id);
+  };
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setText(e.target.value);
   };
 
   return (
@@ -32,10 +71,17 @@ const Item: React.FC<IProps> = ({ item }) => {
       backgroundColor={completed ? 'white' : 'gray.50'}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
-        <Box fontWeight="bold" ml={1}>
-          {name}
-        </Box>
-        <Box fontSize="sm" display="flex" gap={1}>
+        <Editable
+          fontWeight="bold"
+          defaultValue={name}
+          onSubmit={() => handleUpdate(text)}
+          selectAllOnFocus={false}
+        >
+          <EditablePreview />
+          <EditableInput value={text} onChange={onChange} background="white" />
+        </Editable>
+
+        <Box fontSize="sm" display="flex" gap={1} ml={2}>
           <Button
             colorScheme="red"
             size="sm"
@@ -57,17 +103,27 @@ const Item: React.FC<IProps> = ({ item }) => {
       <Box my={3}>
         <Divider />
       </Box>
-      <Box display="flex" alignItems="center" justifyContent="space-between">
-        <Avatar name={createdBy} size="2xs" />
-
-        <Text fontSize="xs">
-          <Text fontSize="xs" as="span" color="gray.400" mr={1}>
-            <i className="fa-solid fa-clock"></i>
-          </Text>
-          <Text fontSize="xs" as="span" color="gray.400" mr={1}>
-            {dayjs(createdAt).format('MMMM DD - HH:mm')}
-          </Text>
+      <Box display="flex" alignItems="center" justifyContent="flex-end">
+        <Text
+          alignSelf="center"
+          fontSize="xs"
+          as="span"
+          color="gray.400"
+          mr={1}
+        >
+          <i className="fa-solid fa-clock"></i>
         </Text>
+
+        <Text
+          alignSelf="center"
+          fontSize="xs"
+          as="span"
+          color="gray.400"
+          mr={2}
+        >
+          {dayjs(createdAt).format('MMMM DD - HH:mm')}
+        </Text>
+        <Avatar name={createdBy} size="2xs" fontWeight="bold" />
       </Box>
     </Box>
   );
