@@ -141,6 +141,7 @@ const Note: React.FC<IProps> = ({ note }) => {
                   placeholder="Leave a comment..."
                   value={descriptionInput}
                   onChange={(e) => setDescriptionInput(e.target.value)}
+                  autoFocus
                 />
                 <Button leftIcon={createIcon} size="xs" px={3} type="submit">
                   Add
