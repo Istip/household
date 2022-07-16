@@ -1,6 +1,6 @@
 import { Box, Button, Input } from '@chakra-ui/react';
 
-const NoteComments: React.FC = () => {
+const Comments: React.FC = () => {
   const createIcon = <i className="fa-solid fa-paper-plane"></i>;
 
   return (
@@ -15,4 +15,4 @@ const NoteComments: React.FC = () => {
   );
 };
 
-export default NoteComments;
+export default Comments;

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Box, Button, Input } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
 import { useItems } from '../context/ItemContext';
+import { useNotes } from '../context/NotesContext';
 
 interface Props {
   tabIndex: number;
@@ -10,6 +11,7 @@ interface Props {
 const Footer: React.FC<Props> = ({ tabIndex }) => {
   const [text, setText] = useState('');
   const { createItem, loading } = useItems();
+  const { createNote } = useNotes();
   const { user } = useAuth();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -17,13 +19,24 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
   };
 
   const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const data = {
-      name: text,
-      createdBy: user!.name,
-    };
-    createItem(data);
     setText('');
+    e.preventDefault();
+
+    if (tabIndex === 0) {
+      const data = {
+        name: text,
+        createdBy: user!.name,
+      };
+      createItem(data);
+    }
+
+    if (tabIndex === 1) {
+      const data = {
+        text,
+        createdBy: user!.name,
+      };
+      createNote(data);
+    }
   };
 
   const firstTab = tabIndex === 0;

@@ -7,6 +7,7 @@ import Item from './items/Item';
 import Tabs from './tabs/Tabs';
 import NotesList from './notes/NotesList';
 import Note from './notes/Note';
+import Comments from './notes/Comments';
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   Tabs,
   NotesList,
   Note,
+  Comments,
 };
