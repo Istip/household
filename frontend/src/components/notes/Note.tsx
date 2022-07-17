@@ -99,16 +99,13 @@ const Note: React.FC<IProps> = ({ note }) => {
           </Box>
         </Box>
 
-        <Button
-          size="xs"
-          p={3}
-          color="white"
-          colorScheme="yellow"
-          onClick={handleDelete}
-          isLoading={loading}
-        >
-          {deleteIcon}
-        </Button>
+        {!loading ? (
+          <Text color="red.600" p={-1} onClick={handleDelete}>
+            {deleteIcon}
+          </Text>
+        ) : (
+          <Box></Box>
+        )}
       </Flex>
 
       <Divider my={2} />
