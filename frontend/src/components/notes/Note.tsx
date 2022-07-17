@@ -82,9 +82,9 @@ const Note: React.FC<IProps> = ({ note }) => {
       p={5}
       border="1px solid"
       borderRadius={4}
-      mb={2}
-      borderColor="yellow.300"
-      backgroundColor="yellow.50"
+      mb={4}
+      borderColor="gray.400"
+      backgroundColor="white"
     >
       <Flex justifyContent="space-between" alignItems="center">
         <Box display="flex" gap={3} alignItems="center">
@@ -155,7 +155,7 @@ const Note: React.FC<IProps> = ({ note }) => {
 
       <Divider my={4} />
 
-      <Comments />
+      <Comments note={note} />
     </Box>
   );
 };

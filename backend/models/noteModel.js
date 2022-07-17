@@ -13,14 +13,25 @@ const noteSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add the name of the user who created this note'],
     },
-    comments: {
-      createdBy: {
-        type: String,
+    comments: [
+      {
+        text: {
+          type: String,
+          required: [true, 'Please add text for your comment'],
+        },
+        createdBy: {
+          type: String,
+          required: [
+            true,
+            'Please add the name of the user who created this comment',
+          ],
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
-      createdAt: {
-        type: Date,
-      },
-    },
+    ],
   },
   {
     timestamps: true,

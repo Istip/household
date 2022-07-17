@@ -5,5 +5,12 @@ export interface Note {
   createdBy: string;
   createdAt: string;
   updatedAt: string;
+  comments: Comment[];
   __v?: number;
+}
+
+interface Comment {
+  text: string;
+  createdBy: string;
+  createdAt: Date;
 }
