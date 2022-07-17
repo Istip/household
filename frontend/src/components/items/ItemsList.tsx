@@ -36,18 +36,20 @@ const ItemsList: React.FC = () => {
 
   return (
     <Box mb="60px">
-      <InputGroup mb={2}>
-        <InputLeftAddon children={searchIcon} />
-        <Input
-          type="text"
-          value={searchText}
-          onChange={onChange}
-          placeholder="Enter text to search items.."
-        />
-      </InputGroup>
+      {filteredItems.length !== 0 && (
+        <InputGroup mb={2}>
+          <InputLeftAddon children={searchIcon} />
+          <Input
+            type="text"
+            value={searchText}
+            onChange={onChange}
+            placeholder="Enter text to search items.."
+          />
+        </InputGroup>
+      )}
 
       {filteredItems.length === 0 && (
-        <Box display="flex" justifyContent="center" alignItems="center">
+        <Box display="flex" justifyContent="center" alignItems="center" my={5}>
           <Text fontSize="xl" fontWeight="bold" color="gray.400">
             No items found...
           </Text>

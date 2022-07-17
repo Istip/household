@@ -40,6 +40,7 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
   };
 
   const firstTab = tabIndex === 0;
+  const addIcon = <i className="fa-solid fa-circle-plus"></i>;
 
   return (
     <form onSubmit={onSubmit}>
@@ -60,7 +61,9 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
         <>
           <Box>
             <Input
-              placeholder={firstTab ? 'Enter item to buy' : 'Leave a note'}
+              placeholder={
+                firstTab ? 'Add item to the list...' : 'Leave a note...'
+              }
               bg="white"
               value={text}
               onChange={onChange}
@@ -68,7 +71,12 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
             />
           </Box>
           <Box ml={1}>
-            <Button type="submit" colorScheme="blue" isLoading={loading}>
+            <Button
+              type="submit"
+              colorScheme="blue"
+              isLoading={loading}
+              leftIcon={addIcon}
+            >
               {firstTab ? 'New item' : 'New note'}
             </Button>
           </Box>
