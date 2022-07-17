@@ -42,7 +42,7 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
         <TabPanel>
           <ItemsList />
         </TabPanel>
-        <TabPanel>
+        <TabPanel bg="gray.100" minH="calc(100vh - 111px)">
           <NotesList />
         </TabPanel>
       </TabPanels>

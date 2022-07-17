@@ -42,12 +42,10 @@ const Comments: React.FC<{ note: Note }> = ({ note }) => {
   return (
     <>
       <Box
-        bg="twitter.50"
+        bg="gray.50"
         p={comments.length ? 1 : 0}
         pt={comments.length ? 2 : 0}
         borderRadius={comments.length ? 10 : 0}
-        border={comments.length ? '1px solid' : 'none'}
-        borderColor="twitter.100"
       >
         {comments.map((comment) => (
           <Flex
@@ -65,7 +63,7 @@ const Comments: React.FC<{ note: Note }> = ({ note }) => {
               </Box>
             </Box>
 
-            <Box fontSize="xs" color="gray.400" minW="65px">
+            <Box fontSize="10px" color="gray.400" minW="55px">
               {dayjs(comment.createdAt).format('MMM DD, HH:mm')}
             </Box>
           </Flex>

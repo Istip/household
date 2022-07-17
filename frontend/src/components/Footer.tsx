@@ -10,6 +10,7 @@ interface Props {
 
 const Footer: React.FC<Props> = ({ tabIndex }) => {
   const [text, setText] = useState('');
+
   const { createItem, loading } = useItems();
   const { createNote } = useNotes();
   const { user } = useAuth();
@@ -58,29 +59,27 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
         borderTop="1px solid"
         borderColor="gray.200"
       >
-        <>
-          <Box>
-            <Input
-              placeholder={
-                firstTab ? 'Add item to the list...' : 'Leave a note...'
-              }
-              bg="white"
-              value={text}
-              onChange={onChange}
-              isRequired
-            />
-          </Box>
-          <Box ml={1}>
-            <Button
-              type="submit"
-              colorScheme="blue"
-              isLoading={loading}
-              leftIcon={addIcon}
-            >
-              {firstTab ? 'New item' : 'New note'}
-            </Button>
-          </Box>
-        </>
+        <Box>
+          <Input
+            placeholder={
+              firstTab ? 'Add item to the list...' : 'Leave a note...'
+            }
+            bg="white"
+            value={text}
+            onChange={onChange}
+            isRequired
+          />
+        </Box>
+        <Box ml={1}>
+          <Button
+            type="submit"
+            colorScheme="blue"
+            isLoading={loading}
+            leftIcon={addIcon}
+          >
+            {firstTab ? 'New item' : 'New note'}
+          </Button>
+        </Box>
       </Box>
     </form>
   );

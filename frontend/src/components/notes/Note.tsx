@@ -78,14 +78,7 @@ const Note: React.FC<IProps> = ({ note }) => {
   };
 
   return (
-    <Box
-      p={5}
-      border="1px solid"
-      borderRadius={4}
-      mb={4}
-      borderColor="gray.400"
-      backgroundColor="white"
-    >
+    <Box p={5} borderRadius={12} mb={4} backgroundColor="white">
       <Flex justifyContent="space-between" alignItems="center">
         <Box display="flex" gap={3} alignItems="center">
           <Avatar name={createdBy} size="xs" fontWeight="bold" />
@@ -100,7 +93,7 @@ const Note: React.FC<IProps> = ({ note }) => {
         </Box>
 
         {!loading ? (
-          <Text color="red.600" p={-1} onClick={handleDelete}>
+          <Text color="red.400" p={-1} onClick={handleDelete}>
             {deleteIcon}
           </Text>
         ) : (
@@ -146,7 +139,7 @@ const Note: React.FC<IProps> = ({ note }) => {
               </Box>
             </form>
           ) : (
-            <Button w="100%" size="xs" my={1} onClick={handleEditButton}>
+            <Button w="100%" size="xs" my={1} mt={3} onClick={handleEditButton}>
               Add description
             </Button>
           )}
