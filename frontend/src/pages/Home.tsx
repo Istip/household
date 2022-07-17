@@ -1,10 +1,10 @@
-import { useState } from 'react';
 import { Footer, Navbar, Tabs } from '../components';
 import ItemProvider from '../context/ItemContext';
 import NoteProvider from '../context/NotesContext';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const Home: React.FC = () => {
-  const [tabIndex, setTabIndex] = useState(1);
+  const [tabIndex, setTabIndex] = useLocalStorage('household-tab-index', 0);
 
   return (
     <>
