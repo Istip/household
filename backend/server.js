@@ -11,7 +11,6 @@ connectDB();
 
 const app = express();
 
-// Middlewares
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cors());
