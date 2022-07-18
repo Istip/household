@@ -67,8 +67,8 @@ const Item: React.FC<IProps> = ({ item }) => {
       border="1px solid"
       borderRadius={10}
       mb={2}
-      borderColor={completed ? 'gray.300' : 'gray.400'}
-      opacity={completed ? '0.5' : '1'}
+      borderColor={completed ? 'white' : 'gray.200'}
+      opacity={completed ? '0.4' : '1'}
       backgroundColor={completed ? 'white' : 'gray.50'}
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
