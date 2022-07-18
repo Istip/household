@@ -1,4 +1,5 @@
 import {
+  Badge,
   Tab,
   TabList,
   TabPanel,
@@ -7,6 +8,8 @@ import {
   Text,
 } from '@chakra-ui/react';
 import { ItemsList, NotesList } from '../';
+import { useItems } from '../../context/ItemContext';
+import { useNotes } from '../../context/NotesContext';
 
 interface Props {
   tabIndex: number;
@@ -14,6 +17,9 @@ interface Props {
 }
 
 const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
+  const { notes } = useNotes();
+  const { items } = useItems();
+
   return (
     <TabsWrapper isFitted variant="enclosed-colored" index={tabIndex}>
       <TabList
@@ -27,13 +33,19 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
         background="white"
       >
         <Tab onClick={() => setTabIndex(0)}>
-          <Text fontSize="sm" fontWeight="bold">
+          <Text as="div" fontSize="sm" fontWeight="bold">
             SHOPPING
+            <Badge as="div" borderRadius="full" ml={2}>
+              {items.length}
+            </Badge>
           </Text>
         </Tab>
         <Tab onClick={() => setTabIndex(1)}>
-          <Text fontSize="sm" fontWeight="bold">
+          <Text as="div" fontSize="sm" fontWeight="bold">
             NOTES
+            <Badge as="div" borderRadius={10} ml={2}>
+              {notes.length}
+            </Badge>
           </Text>
         </Tab>
       </TabList>
