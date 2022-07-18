@@ -7,7 +7,7 @@ import {
   Tabs as TabsWrapper,
   Text,
 } from '@chakra-ui/react';
-import { ItemsList, NotesList } from '../';
+import { ItemsList, NotesList, ExpenseList } from '../';
 import { useItems } from '../../context/ItemContext';
 import { useNotes } from '../../context/NotesContext';
 
@@ -34,7 +34,7 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
       >
         <Tab onClick={() => setTabIndex(0)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
-            SHOPPING
+            Shopping
             <Badge as="div" borderRadius="full" ml={2}>
               {items.length}
             </Badge>
@@ -42,10 +42,15 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
         </Tab>
         <Tab onClick={() => setTabIndex(1)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
-            NOTES
+            Notes
             <Badge as="div" borderRadius={10} ml={2}>
               {notes.length}
             </Badge>
+          </Text>
+        </Tab>
+        <Tab onClick={() => setTabIndex(2)}>
+          <Text as="div" fontSize="sm" fontWeight="bold">
+            Expenses
           </Text>
         </Tab>
       </TabList>
@@ -56,6 +61,9 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
         </TabPanel>
         <TabPanel bg="gray.100" minH="calc(100vh - 111px)">
           <NotesList />
+        </TabPanel>
+        <TabPanel>
+          <ExpenseList />
         </TabPanel>
       </TabPanels>
     </TabsWrapper>

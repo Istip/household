@@ -8,6 +8,7 @@ import Tabs from './tabs/Tabs';
 import NotesList from './notes/NotesList';
 import Note from './notes/Note';
 import Comments from './notes/Comments';
+import ExpenseList from './expenses/ExpenseList';
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   NotesList,
   Note,
   Comments,
+  ExpenseList,
 };
