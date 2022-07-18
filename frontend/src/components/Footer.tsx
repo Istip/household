@@ -1,47 +1,93 @@
-import React, { useState } from 'react';
-import { Box, Button, Input } from '@chakra-ui/react';
+import { useState } from 'react';
+import { Box, Button, Input, useToast } from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
 import { useItems } from '../context/ItemContext';
 import { useNotes } from '../context/NotesContext';
+import { Expense } from '../interfaces/Expense';
+import axios from '../helpers/axios';
 
 interface Props {
   tabIndex: number;
+  expenses: Expense[];
+  setExpenses: (expenses: Expense[]) => void;
 }
 
-const Footer: React.FC<Props> = ({ tabIndex }) => {
+interface Operation {
+  icon: JSX.Element;
+  function: () => void;
+  text: string;
+  type: string;
+  colorScheme: string;
+  placeholder: string;
+}
+
+const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
   const [text, setText] = useState('');
 
   const { createItem, loading } = useItems();
   const { createNote } = useNotes();
   const { user } = useAuth();
 
+  const toast = useToast();
+
+  const tabOperations: Operation[] = [
+    {
+      icon: <i className="fa-solid fa-cart-shopping"></i>,
+      function: () => {
+        createItem({ name: text, createdBy: user!.name });
+      },
+      text: 'New Item',
+      type: 'text',
+      colorScheme: 'blue',
+      placeholder: 'Add item to the list...',
+    },
+    {
+      icon: <i className="fa-solid fa-comment-dots"></i>,
+      function: () => {
+        createNote({ text, createdBy: user!.name });
+      },
+      text: 'New Note',
+      type: 'text',
+      colorScheme: 'yellow',
+      placeholder: 'Leave a note...',
+    },
+    {
+      icon: <i className="fa-solid fa-money-bill-wave"></i>,
+      function: () => {
+        createExpense({ amount: text });
+      },
+      text: 'New Expense',
+      type: 'number',
+      colorScheme: 'green',
+      placeholder: 'Enter the ammount...',
+    },
+  ];
+
+  const createExpense = (data: { amount: string }) => {
+    axios
+      .post('/expenses', data)
+      .then((res) => {
+        setExpenses([res.data, ...expenses]);
+      })
+      .catch((err) => {
+        toast({
+          title: 'Could not add new expense!',
+          position: 'top',
+          isClosable: true,
+          status: 'error',
+        });
+      });
+  };
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setText(e.target.value);
   };
 
   const onSubmit = (e: React.FormEvent) => {
-    setText('');
     e.preventDefault();
-
-    if (tabIndex === 0) {
-      const data = {
-        name: text,
-        createdBy: user!.name,
-      };
-      createItem(data);
-    }
-
-    if (tabIndex === 1) {
-      const data = {
-        text,
-        createdBy: user!.name,
-      };
-      createNote(data);
-    }
+    setText('');
+    tabOperations[tabIndex].function();
   };
-
-  const firstTab = tabIndex === 0;
-  const addIcon = <i className="fa-solid fa-circle-plus"></i>;
 
   return (
     <form onSubmit={onSubmit}>
@@ -62,23 +108,22 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
       >
         <Box>
           <Input
-            placeholder={
-              firstTab ? 'Add item to the list...' : 'Leave a note...'
-            }
+            placeholder={tabOperations[tabIndex].placeholder}
             bg="white"
             value={text}
             onChange={onChange}
             isRequired
+            type={tabOperations[tabIndex].type}
           />
         </Box>
         <Box ml={1}>
           <Button
             type="submit"
-            colorScheme="blue"
+            colorScheme={tabOperations[tabIndex].colorScheme}
             isLoading={loading}
-            leftIcon={addIcon}
+            leftIcon={tabOperations[tabIndex].icon}
           >
-            {firstTab ? 'New item' : 'New note'}
+            {tabOperations[tabIndex].text}
           </Button>
         </Box>
       </Box>

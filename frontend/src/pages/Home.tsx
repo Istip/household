@@ -21,7 +21,11 @@ const Home: React.FC = () => {
             expenses={expenses}
             setExpenses={setExpenses}
           />
-          <Footer tabIndex={tabIndex} />
+          <Footer
+            tabIndex={tabIndex}
+            expenses={expenses}
+            setExpenses={setExpenses}
+          />
         </NoteProvider>
       </ItemProvider>
     </>

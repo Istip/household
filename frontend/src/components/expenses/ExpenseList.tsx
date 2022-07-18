@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { Box, Button, Text, useToast } from '@chakra-ui/react';
 import axios from '../../helpers/axios';
-import Spin from '../Spin';
 import { Expense } from '../../interfaces/Expense';
 import dayjs from 'dayjs';
 
@@ -11,13 +10,9 @@ interface Props {
 }
 
 const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
-  const [loading, setLoading] = useState(false);
-
   const toast = useToast();
 
   const getExpenses = () => {
-    setLoading(true);
-
     axios
       .get('/expenses')
       .then((res) => {
@@ -30,26 +25,27 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
           isClosable: true,
           status: 'error',
         });
-      })
-      .finally(() => setLoading(false));
+      });
   };
 
-  const deleteExpense = (id: string) => {
-    setLoading(true);
-
+  const deleteExpense = (id: string, amount: number) => {
     axios
       .delete(`/expenses/${id}`)
       .then((res) => {
-        const filterExpenses = expenses.filter(
+        const deleteExpense = expenses.filter(
           (expense: Expense) => expense._id !== id
         );
-        setExpenses(filterExpenses);
+        setExpenses(deleteExpense);
+
+        toast({
+          title: <Text fontSize="sm">Deleted expense: {amount}</Text>,
+          position: 'top',
+          isClosable: true,
+          status: 'error',
+        });
       })
       .catch((err) => {
         console.log(err);
-      })
-      .finally(() => {
-        setLoading(false);
       });
   };
 
@@ -63,10 +59,6 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
     getExpenses();
     // eslint-disable-next-line
   }, [expenses.length]);
-
-  if (loading) {
-    return <Spin />;
-  }
 
   return (
     <>
@@ -96,6 +88,14 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
           </Text>
         </Box>
       </Box>
+
+      {!expenses.length && (
+        <Box display="flex" justifyContent="center" alignItems="center" my={5}>
+          <Text fontSize="xl" fontWeight="bold" color="gray.400">
+            Add your expenses...
+          </Text>
+        </Box>
+      )}
 
       <Box mt={2}>
         {expenses.map((expense) => (
@@ -127,7 +127,7 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
                 colorScheme="red"
                 px={2}
                 variant="ghost"
-                onClick={() => deleteExpense(expense._id)}
+                onClick={() => deleteExpense(expense._id, expense.amount)}
               >
                 <i className="fa-solid fa-circle-xmark"></i>
               </Button>
