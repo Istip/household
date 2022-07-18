@@ -58,6 +58,7 @@ const Footer: React.FC<Props> = ({ tabIndex }) => {
         h="60px"
         borderTop="1px solid"
         borderColor="gray.200"
+        zIndex={2}
       >
         <Box>
           <Input
