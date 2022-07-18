@@ -5,7 +5,7 @@ const token = localStorage.getItem('user')
   : '';
 
 const instance = axios.create({
-  baseURL: `${process.env.REACT_APP_BACKEND_URL}/api`,
+  baseURL: '/api',
   headers: {
     Authorization: `Bearer ${token}`,
   },
