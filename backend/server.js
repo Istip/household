@@ -19,6 +19,7 @@ app.use(cors());
 app.use('/api/users', require('./routes/userRoutes'));
 app.use('/api/items', require('./routes/itemRoutes'));
 app.use('/api/notes', require('./routes/noteRoutes'));
+app.use('/api/expenses', require('./routes/expenseRoutes'));
 
 // Serve frontend
 if (process.env.NODE_ENV === 'production') {
