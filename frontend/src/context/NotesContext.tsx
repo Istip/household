@@ -106,8 +106,7 @@ export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
-    return fetchNotes();
-    // eslint-disable-next-line
+    fetchNotes();
   }, []);
 
   return (

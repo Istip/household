@@ -106,8 +106,7 @@ export const ItemProvider: React.FC<{ children: React.ReactNode }> = ({
   };
 
   useEffect(() => {
-    return fetchItems();
-    // eslint-disable-next-line
+    fetchItems();
   }, []);
 
   return (

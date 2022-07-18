@@ -1,15 +1,13 @@
-import { lazy, Suspense } from 'react';
+import { Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
-import { Register, Login } from './pages/';
+import { Register, Login, Home } from './pages/';
 import { Spin } from './components/';
 import { useAuth } from './context/AuthContext';
-
-const Home = lazy(() => import('./pages/Home'));
 
 function App() {
   const { user } = useAuth();

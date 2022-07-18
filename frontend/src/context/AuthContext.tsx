@@ -37,8 +37,8 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
     axios
       .post('/users', data)
-      .then((res) => {
-        const response = res.data;
+      .then(async (res) => {
+        const response = await res.data;
 
         localStorage.setItem('user', JSON.stringify(response));
         setUser(response);
@@ -77,6 +77,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const logout = () => {
     localStorage.removeItem('user');
     setUser(null);
+    setAuthReady(false);
   };
 
   useEffect(() => {
