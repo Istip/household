@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
   Avatar,
   Box,
@@ -10,9 +11,9 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
+import { useAuth } from '../../context/AuthContext';
 import { Item as IItem } from '../../interfaces/Item';
 import dayjs from 'dayjs';
-import { useState } from 'react';
 
 interface IProps {
   item: IItem;
@@ -20,6 +21,7 @@ interface IProps {
 const Item: React.FC<IProps> = ({ item }) => {
   const [text, setText] = useState(item.name);
 
+  const { user } = useAuth();
   const { updateItem, deleteItem, loading } = useItems();
   const { completed, _id, name, createdAt, createdBy, updatedAt } = item;
 
@@ -109,7 +111,7 @@ const Item: React.FC<IProps> = ({ item }) => {
           {createdAt !== updatedAt ? (
             <Text fontSize="xs" fontWeight="light" color="telegram.300">
               <i className="fa-solid fa-square-pen"></i>{' '}
-              {dayjs(updatedAt).format('MMMM DD HH:mm')}
+              {dayjs(updatedAt).format('MMM DD, HH:mm')}
             </Text>
           ) : (
             ''
@@ -134,9 +136,14 @@ const Item: React.FC<IProps> = ({ item }) => {
             color="gray.400"
             mr={2}
           >
-            {dayjs(createdAt).format('MMMM DD HH:mm')}
+            {dayjs(createdAt).format('MMM DD, HH:mm')}
           </Text>
-          <Avatar name={createdBy} size="2xs" fontWeight="bold" />
+          <Avatar
+            name={createdBy}
+            size="2xs"
+            fontWeight="bold"
+            src={user!.image}
+          />
         </Box>
       </Box>
     </Box>

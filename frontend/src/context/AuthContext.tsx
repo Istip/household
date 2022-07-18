@@ -7,6 +7,7 @@ interface IState {
     name: string;
     email: string;
     token: string;
+    image?: string;
   } | null;
   login: (data: { email: string; password: string }) => void;
   register: (data: { name: string; email: string; password: string }) => void;

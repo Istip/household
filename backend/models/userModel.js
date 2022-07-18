@@ -20,6 +20,11 @@ const userSchema = mongoose.Schema(
       required: true,
       default: false,
     },
+    image: {
+      type: String,
+      default:
+        'https://www.rombo.tools/wp/wp-content/uploads/2021/05/tawoman_flakesmakeup_1440_trans025_uplight-3_square.png',
+    },
   },
   {
     timestamps: true,

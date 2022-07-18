@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import {
   Avatar,
   Box,
@@ -12,10 +12,11 @@ import {
   Text,
   useToast,
 } from '@chakra-ui/react';
-import dayjs from 'dayjs';
+import { useNotes } from '../../context/NotesContext';
+import { useAuth } from '../../context/AuthContext';
 import { Note as INote } from '../../interfaces/Note';
 import { Comments } from '../';
-import { useNotes } from '../../context/NotesContext';
+import dayjs from 'dayjs';
 
 interface IProps {
   note: INote;
@@ -28,8 +29,10 @@ const Note: React.FC<IProps> = ({ note }) => {
   const [descriptionInput, setDescriptionInput] = useState('');
   const [editDescription, setEditDescription] = useState(false);
 
-  const { _id, text, createdAt, createdBy, description } = note;
+  const { user } = useAuth();
   const { deleteNote, updateNote, loading } = useNotes();
+  const { _id, text, createdAt, createdBy, description } = note;
+
   const toast = useToast();
 
   const deleteIcon = <i className="fa-solid fa-circle-xmark"></i>;
@@ -81,7 +84,12 @@ const Note: React.FC<IProps> = ({ note }) => {
     <Box p={5} borderRadius={12} mb={4} backgroundColor="white">
       <Flex justifyContent="space-between" alignItems="center">
         <Box display="flex" gap={3} alignItems="center">
-          <Avatar name={createdBy} size="xs" fontWeight="bold" />
+          <Avatar
+            name={createdBy}
+            size="xs"
+            fontWeight="bold"
+            src={user!.image}
+          />
           <Box display="flex" gap={1}>
             <Text color="gray.400" fontSize="xs">
               <i className="fa-solid fa-clock"></i>
