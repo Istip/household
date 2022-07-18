@@ -10,13 +10,21 @@ import {
 import { ItemsList, NotesList, ExpenseList } from '../';
 import { useItems } from '../../context/ItemContext';
 import { useNotes } from '../../context/NotesContext';
+import { Expense } from '../../interfaces/Expense';
 
 interface Props {
   tabIndex: number;
   setTabIndex: (index: number) => void;
+  expenses: Expense[];
+  setExpenses: (expenses: Expense[]) => void;
 }
 
-const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
+const Tabs: React.FC<Props> = ({
+  tabIndex,
+  setTabIndex,
+  expenses,
+  setExpenses,
+}) => {
   const { notes } = useNotes();
   const { items } = useItems();
 
@@ -63,7 +71,7 @@ const Tabs: React.FC<Props> = ({ tabIndex, setTabIndex }) => {
           <NotesList />
         </TabPanel>
         <TabPanel>
-          <ExpenseList />
+          <ExpenseList expenses={expenses} setExpenses={setExpenses} />
         </TabPanel>
       </TabPanels>
     </TabsWrapper>

@@ -2,15 +2,15 @@ import { useEffect, useState } from 'react';
 import { Box, Button, Text, useToast } from '@chakra-ui/react';
 import axios from '../../helpers/axios';
 import Spin from '../Spin';
+import { Expense } from '../../interfaces/Expense';
+import dayjs from 'dayjs';
 
-interface Expense {
-  _id: string;
-  amount: number;
-  user: string;
+interface Props {
+  expenses: Expense[];
+  setExpenses: (expenses: Expense[]) => void;
 }
 
-const ExpenseList: React.FC = () => {
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
   const [loading, setLoading] = useState(false);
 
   const toast = useToast();
@@ -40,9 +40,10 @@ const ExpenseList: React.FC = () => {
     axios
       .delete(`/expenses/${id}`)
       .then((res) => {
-        setExpenses((prevExpenses) => {
-          return prevExpenses.filter((expense) => expense._id !== id);
-        });
+        const filterExpenses = expenses.filter(
+          (expense: Expense) => expense._id !== id
+        );
+        setExpenses(filterExpenses);
       })
       .catch((err) => {
         console.log(err);
@@ -107,8 +108,9 @@ const ExpenseList: React.FC = () => {
             p={1}
             background={expense.amount >= 0 ? 'green.50' : 'red.50'}
           >
-            <Box>
-              <i className="fa-solid fa-clock"></i> 2020.20.12
+            <Box color="gray.600" pl={2}>
+              <i className="fa-solid fa-clock"></i>{' '}
+              {dayjs(expense.createdAt).format('MMM DD, HH:mm')}
             </Box>
 
             <Box
