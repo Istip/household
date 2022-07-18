@@ -22,8 +22,7 @@ const userSchema = mongoose.Schema(
     },
     image: {
       type: String,
-      default:
-        'https://www.rombo.tools/wp/wp-content/uploads/2021/05/tawoman_flakesmakeup_1440_trans025_uplight-3_square.png',
+      default: '',
     },
   },
   {
