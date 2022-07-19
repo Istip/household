@@ -41,9 +41,18 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Flex align="center" justify="center" h="100vh" flexDirection="column">
+    <Flex
+      align="center"
+      justify="center"
+      h="100vh"
+      flexDirection="column"
+      background="gray.50"
+      p={3}
+    >
       <Flex align="center" justify="center">
-        <Text fontSize="4xl">Registration</Text>
+        <Text fontSize="4xl" fontWeight="bold">
+          Registration
+        </Text>
       </Flex>
       <Box w="100%">
         <Flex align="center" justify="center">
@@ -59,6 +68,7 @@ const Register: React.FC = () => {
                     id="name"
                     placeholder="Enter your name"
                     onChange={onChange}
+                    background="white"
                   />
                   <FormHelperText color="gray.300">
                     Even a short nickname will be enough!
@@ -76,6 +86,7 @@ const Register: React.FC = () => {
                     id="email"
                     placeholder="Enter your email address"
                     onChange={onChange}
+                    background="white"
                   />
                 </FormControl>
               </Box>
@@ -90,18 +101,19 @@ const Register: React.FC = () => {
                     id="password"
                     placeholder="Enter your password"
                     onChange={onChange}
+                    background="white"
                   />
                 </FormControl>
               </Box>
 
               <Box w="100%" pt={8} px={4}>
                 <Button
-                  colorScheme="gray"
+                  colorScheme="blue"
                   w="100%"
                   type="submit"
                   isLoading={loading}
                 >
-                  Create account
+                  Create Account
                 </Button>
               </Box>
 
@@ -112,10 +124,13 @@ const Register: React.FC = () => {
               )}
 
               <Box pt={4}>
-                <Flex align="center" justify="center" color="blue.200">
-                  <b>
-                    <Link to="/login">Already registered member?</Link>
-                  </b>
+                <Flex
+                  align="center"
+                  justify="center"
+                  color="blue.200"
+                  fontWeight="bold"
+                >
+                  <Link to="/login">Already registered member?</Link>
                 </Flex>
               </Box>
             </form>

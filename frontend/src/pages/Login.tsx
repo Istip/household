@@ -42,9 +42,18 @@ const Register: React.FC = () => {
   };
 
   return (
-    <Flex align="center" justify="center" h="100vh" flexDirection="column">
+    <Flex
+      align="center"
+      justify="center"
+      h="100vh"
+      flexDirection="column"
+      background="gray.50"
+      p={3}
+    >
       <Flex align="center" justify="center">
-        <Text fontSize="4xl">Login</Text>
+        <Text fontSize="4xl" fontWeight="bold">
+          Sign In
+        </Text>
       </Flex>
       <Box w="100%">
         <Flex align="center" justify="center">
@@ -60,6 +69,7 @@ const Register: React.FC = () => {
                     id="email"
                     placeholder="Enter your email"
                     onChange={onChange}
+                    background="white"
                   />
                 </FormControl>
               </Box>
@@ -75,6 +85,7 @@ const Register: React.FC = () => {
                       id="password"
                       placeholder="Enter your password"
                       onChange={onChange}
+                      background="white"
                     />
                     <InputRightElement width="4.5rem">
                       <Button
@@ -91,7 +102,7 @@ const Register: React.FC = () => {
 
               <Box w="100%" pt={8} px={4}>
                 <Button
-                  colorScheme="gray"
+                  colorScheme="blue"
                   w="100%"
                   type="submit"
                   isLoading={loading}
@@ -107,10 +118,13 @@ const Register: React.FC = () => {
               )}
 
               <Box pt={4}>
-                <Flex align="center" justify="center" color="blue.200">
-                  <b>
-                    <Link to="/register">You don't have account yet?</Link>
-                  </b>
+                <Flex
+                  align="center"
+                  justify="center"
+                  color="blue.200"
+                  fontWeight="bold"
+                >
+                  <Link to="/register">You don't have account yet?</Link>
                 </Flex>
               </Box>
             </form>

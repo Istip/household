@@ -41,7 +41,6 @@ const Note: React.FC<IProps> = ({ note }) => {
             </Text>
           </Box>
         </Box>
-
         {!loading ? (
           <Text color="red.400" p={-1} onClick={handleDelete}>
             {deleteIcon}
@@ -51,12 +50,9 @@ const Note: React.FC<IProps> = ({ note }) => {
         )}
       </Flex>
 
-      <Divider my={2} />
-
-      <Text fontWeight="bold">{text}</Text>
-
       <Divider my={4} />
-
+      <Text fontWeight="bold">{text}</Text>
+      <Divider my={4} />
       <Comments note={note} />
     </Box>
   );

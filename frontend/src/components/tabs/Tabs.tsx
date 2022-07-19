@@ -43,17 +43,21 @@ const Tabs: React.FC<Props> = ({
         <Tab onClick={() => setTabIndex(0)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
             Shopping
-            <Badge as="div" borderRadius="full" ml={2}>
-              {items.length}
-            </Badge>
+            {items.length ? (
+              <Badge as="div" borderRadius="full" ml={2}>
+                {items.length}
+              </Badge>
+            ) : null}
           </Text>
         </Tab>
         <Tab onClick={() => setTabIndex(1)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
             Notes
-            <Badge as="div" borderRadius={10} ml={2}>
-              {notes.length}
-            </Badge>
+            {notes.length ? (
+              <Badge as="div" borderRadius={10} ml={2}>
+                {notes.length}
+              </Badge>
+            ) : null}
           </Text>
         </Tab>
         <Tab onClick={() => setTabIndex(2)}>
