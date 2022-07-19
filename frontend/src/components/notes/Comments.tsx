@@ -57,7 +57,7 @@ const Comments: React.FC<{ note: Note }> = ({ note }) => {
             p={1}
           >
             <Box display="flex" alignItems="flex-start" gap={2}>
-              <Avatar size="2xs" name={comment.createdBy} src={user!.image} />
+              <Avatar size="2xs" name={comment.createdBy} />
               <Box>
                 <Text fontSize="xs">{comment.text}</Text>
               </Box>

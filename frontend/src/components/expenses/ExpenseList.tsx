@@ -45,7 +45,12 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
         });
       })
       .catch((err) => {
-        console.log(err);
+        toast({
+          title: err.response.data.message,
+          position: 'top',
+          isClosable: true,
+          status: 'error',
+        });
       });
   };
 

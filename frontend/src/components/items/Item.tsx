@@ -11,7 +11,6 @@ import {
   useToast,
 } from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
-import { useAuth } from '../../context/AuthContext';
 import { Item as IItem } from '../../interfaces/Item';
 import dayjs from 'dayjs';
 
@@ -21,7 +20,6 @@ interface IProps {
 const Item: React.FC<IProps> = ({ item }) => {
   const [text, setText] = useState(item.name);
 
-  const { user } = useAuth();
   const { updateItem, deleteItem, loading } = useItems();
   const { completed, _id, name, createdAt, createdBy, updatedAt } = item;
 
@@ -138,12 +136,7 @@ const Item: React.FC<IProps> = ({ item }) => {
           >
             {dayjs(createdAt).format('MMM DD, HH:mm')}
           </Text>
-          <Avatar
-            name={createdBy}
-            size="2xs"
-            fontWeight="bold"
-            src={user!.image}
-          />
+          <Avatar name={createdBy} size="2xs" fontWeight="bold" />
         </Box>
       </Box>
     </Box>

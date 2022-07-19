@@ -4,7 +4,6 @@ import { useAuth } from '../context/AuthContext';
 const Navbar = () => {
   const { logout, user } = useAuth();
 
-  console.log(user);
   return (
     <Box
       p={5}
@@ -31,12 +30,7 @@ const Navbar = () => {
           </Button>
         </Box>
         <Box>
-          <Avatar
-            size="sm"
-            name={user!.name}
-            fontWeight="black"
-            src={user!.image}
-          />
+          <Avatar size="sm" name={user!.name} fontWeight="black" />
         </Box>
       </Box>
     </Box>
