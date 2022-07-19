@@ -6,9 +6,6 @@ const noteSchema = mongoose.Schema(
       type: String,
       require: [true, 'Please add text for your note'],
     },
-    description: {
-      type: String,
-    },
     createdBy: {
       type: String,
       required: [true, 'Please add the name of the user who created this note'],
