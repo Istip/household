@@ -28,9 +28,16 @@ export const NoteProvider: React.FC<{ children: React.ReactNode }> = ({
   const toast = useToast();
 
   const fetchNotes = () => {
-    axios.get('/notes').then((res) => {
-      setNotes(res.data);
-    });
+    setLoading(true);
+
+    axios
+      .get('/notes')
+      .then((res) => {
+        setNotes(res.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const updateNote = (id: string, data: object) => {

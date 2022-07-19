@@ -1,11 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Box, Input, InputGroup, InputLeftAddon, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  Spinner,
+  Text,
+} from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
 import { Item as IItem } from '../../interfaces/Item';
 import { Item } from '../';
 
 const ItemsList: React.FC = () => {
-  const { items } = useItems();
+  const { items, loading } = useItems();
 
   const [searchText, setSearchText] = useState('');
   const [filteredItems, setFilteredItems] = useState<IItem[]>(items);
@@ -32,6 +40,20 @@ const ItemsList: React.FC = () => {
     setFilteredItems(newItem);
     // eslint-disable-next-line
   }, [searchText]);
+
+  if (loading) {
+    return (
+      <Flex justifyContent="center" p={5}>
+        <Spinner
+          thickness="4px"
+          speed="0.65s"
+          emptyColor="gray.200"
+          color="blue.500"
+          size="xl"
+        />
+      </Flex>
+    );
+  }
 
   return (
     <Box mb="110px">

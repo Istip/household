@@ -28,9 +28,16 @@ export const ItemProvider: React.FC<{ children: React.ReactNode }> = ({
   const toast = useToast();
 
   const fetchItems = () => {
-    axios.get('/items').then((res) => {
-      setItems(res.data);
-    });
+    setLoading(true);
+
+    axios
+      .get('/items')
+      .then((res) => {
+        setItems(res.data);
+      })
+      .finally(() => {
+        setLoading(false);
+      });
   };
 
   const updateItem = (id: string, data: object) => {
