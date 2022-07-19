@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Box,
   Button,
@@ -23,13 +23,14 @@ interface Operation {
   icon: JSX.Element;
   function: () => void;
   text: string;
-  type: string;
-  colorScheme: string;
+  type: 'text' | 'number';
+  colorScheme: 'blue' | 'yellow' | 'green' | 'red';
   placeholder: string;
 }
 
 const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
   const [text, setText] = useState('');
+  const [expenseColor, setExpenseColor] = useState<'red' | 'green'>('green');
 
   const { createItem, loading } = useItems();
   const { createNote } = useNotes();
@@ -65,7 +66,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
       },
       text: 'New Expense',
       type: 'number',
-      colorScheme: 'green',
+      colorScheme: expenseColor,
       placeholder: 'Enter the ammount...',
     },
   ];
@@ -95,6 +96,13 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
     setText('');
     tabOperations[tabIndex].function();
   };
+
+  useEffect(() => {
+    if (tabIndex === 2 && text !== '') {
+      setExpenseColor(parseInt(text) > 0 ? 'green' : 'red');
+    }
+    // eslint-disable-next-line
+  }, [text]);
 
   return (
     <form onSubmit={onSubmit}>
