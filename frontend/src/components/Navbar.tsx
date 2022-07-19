@@ -21,6 +21,7 @@ const Navbar = () => {
     >
       <Box>
         <Text fontSize="md" color="blue.600" fontWeight="black">
+          <i className="fa-solid fa-house" style={{ marginRight: '5px' }} />
           HOUSEHOLD
         </Text>
       </Box>
