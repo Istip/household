@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Box, Button, Input, useToast } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+  useToast,
+} from '@chakra-ui/react';
 import { useAuth } from '../context/AuthContext';
 import { useItems } from '../context/ItemContext';
 import { useNotes } from '../context/NotesContext';
@@ -107,23 +114,27 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
         zIndex={2}
       >
         <Box>
-          <Input
-            placeholder={tabOperations[tabIndex].placeholder}
-            bg="white"
-            value={text}
-            onChange={onChange}
-            isRequired
-            type={tabOperations[tabIndex].type}
-            size="sm"
-            borderRadius="6px"
-          />
+          <InputGroup size="sm">
+            <InputLeftAddon
+              children={tabOperations[tabIndex].icon}
+              borderRadius="6px"
+            />
+            <Input
+              placeholder={tabOperations[tabIndex].placeholder}
+              bg="white"
+              value={text}
+              onChange={onChange}
+              isRequired
+              type={tabOperations[tabIndex].type}
+              borderRadius="6px"
+            />
+          </InputGroup>
         </Box>
         <Box ml={1}>
           <Button
             type="submit"
             colorScheme={tabOperations[tabIndex].colorScheme}
             isLoading={loading}
-            leftIcon={tabOperations[tabIndex].icon}
             size="sm"
           >
             {tabOperations[tabIndex].text}

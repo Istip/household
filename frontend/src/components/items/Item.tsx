@@ -17,6 +17,7 @@ import dayjs from 'dayjs';
 interface IProps {
   item: IItem;
 }
+
 const Item: React.FC<IProps> = ({ item }) => {
   const [text, setText] = useState(item.name);
 
