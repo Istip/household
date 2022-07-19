@@ -1,11 +1,11 @@
 import {
   Badge,
+  Box,
   Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs as TabsWrapper,
-  Text,
 } from '@chakra-ui/react';
 import { ItemsList, NotesList, ExpenseList } from '../';
 import { useItems } from '../../context/ItemContext';
@@ -44,39 +44,49 @@ const Tabs: React.FC<Props> = ({
         h="60px"
       >
         <Tab _selected={selected} onClick={() => setTabIndex(0)}>
-          <Text as="div" fontSize="sm" fontWeight="bold">
-            Shop
+          <Box fontSize="sm" fontWeight="bold" position="relative">
+            <i className="fa-solid fa-lg fa-cart-shopping"></i>
+
             {items.length ? (
               <Badge
-                fontSize="9px"
+                position="absolute"
+                right="calc(50% - 16px)"
+                top="-6px"
+                fontSize="8px"
                 borderRadius="full"
-                colorScheme="blue"
+                colorScheme="red"
+                variant="solid"
                 ml={2}
               >
                 {items.length}
               </Badge>
             ) : null}
-          </Text>
+          </Box>
         </Tab>
         <Tab _selected={selected} onClick={() => setTabIndex(1)}>
-          <Text as="div" fontSize="sm" fontWeight="bold">
-            Notes
+          <Box fontSize="sm" fontWeight="bold" position="relative">
+            <i className="fa-solid fa-lg fa-comment"></i>
+
             {notes.length ? (
               <Badge
+                position="absolute"
+                right="calc(50% - 16px)"
+                top="-6px"
                 fontSize="9px"
                 borderRadius="full"
-                colorScheme="blue"
+                colorScheme="red"
+                variant="solid"
                 ml={2}
               >
                 {notes.length}
               </Badge>
             ) : null}
-          </Text>
+          </Box>
         </Tab>
         <Tab _selected={selected} onClick={() => setTabIndex(2)}>
-          <Text as="div" fontSize="sm" fontWeight="bold">
-            Expenses
-          </Text>
+          <Box as="div" fontSize="sm" fontWeight="bold">
+            <i className="fa-solid fa-lg fa-money-bill-wave"></i>
+          </Box>
         </Tab>
       </TabList>
 
