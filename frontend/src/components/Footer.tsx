@@ -93,7 +93,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
     <form onSubmit={onSubmit}>
       <Box
         position="fixed"
-        bottom={0}
+        bottom="38px"
         right={0}
         left={0}
         background="gray.50"
@@ -101,7 +101,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
         justifyContent="space-between"
         alignItems="center"
         p={2}
-        h="60px"
+        h="50px"
         borderTop="1px solid"
         borderColor="gray.200"
         zIndex={2}
@@ -114,6 +114,8 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
             onChange={onChange}
             isRequired
             type={tabOperations[tabIndex].type}
+            size="sm"
+            borderRadius="6px"
           />
         </Box>
         <Box ml={1}>
@@ -122,6 +124,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
             colorScheme={tabOperations[tabIndex].colorScheme}
             isLoading={loading}
             leftIcon={tabOperations[tabIndex].icon}
+            size="sm"
           >
             {tabOperations[tabIndex].text}
           </Button>

@@ -30,12 +30,11 @@ const ItemsList: React.FC = () => {
     });
 
     setFilteredItems(newItem);
-
     // eslint-disable-next-line
   }, [searchText]);
 
   return (
-    <Box mb="60px">
+    <Box mb="90px">
       {items.length !== 0 && (
         <InputGroup mb={2}>
           <InputLeftAddon children={searchIcon} />

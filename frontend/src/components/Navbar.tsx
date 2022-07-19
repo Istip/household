@@ -12,6 +12,8 @@ const Navbar = () => {
       display="flex"
       background="gray.50"
       position="fixed"
+      borderBottom="1px solid"
+      borderColor="gray.200"
       top={0}
       right={0}
       left={0}

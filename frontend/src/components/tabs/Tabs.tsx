@@ -28,46 +28,58 @@ const Tabs: React.FC<Props> = ({
   const { notes } = useNotes();
   const { items } = useItems();
 
+  const selected = { color: 'white', bg: 'blue.300' };
+
   return (
-    <TabsWrapper isFitted variant="enclosed-colored" index={tabIndex}>
+    <TabsWrapper isFitted variant="unstyled" index={tabIndex}>
       <TabList
+        borderTop="1px solid"
+        borderColor="blue.300"
         position="fixed"
         left={0}
         right={0}
-        top="72px"
+        bottom={0}
         zIndex={2}
-        pb={1}
-        mx={-1}
         background="white"
       >
-        <Tab onClick={() => setTabIndex(0)}>
+        <Tab _selected={selected} onClick={() => setTabIndex(0)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
-            Shopping
+            Shop
             {items.length ? (
-              <Badge as="div" borderRadius="full" ml={2}>
+              <Badge
+                fontSize="9px"
+                borderRadius="full"
+                colorScheme="blue"
+                ml={2}
+              >
                 {items.length}
               </Badge>
             ) : null}
           </Text>
         </Tab>
-        <Tab onClick={() => setTabIndex(1)}>
+        <Tab _selected={selected} onClick={() => setTabIndex(1)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
             Notes
             {notes.length ? (
-              <Badge as="div" borderRadius={10} ml={2}>
+              <Badge
+                fontSize="9px"
+                borderRadius="full"
+                colorScheme="blue"
+                ml={2}
+              >
                 {notes.length}
               </Badge>
             ) : null}
           </Text>
         </Tab>
-        <Tab onClick={() => setTabIndex(2)}>
+        <Tab _selected={selected} onClick={() => setTabIndex(2)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
             Expenses
           </Text>
         </Tab>
       </TabList>
 
-      <TabPanels mt="111px">
+      <TabPanels mt="72px">
         <TabPanel>
           <ItemsList />
         </TabPanel>
