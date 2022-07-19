@@ -34,7 +34,7 @@ const ItemsList: React.FC = () => {
   }, [searchText]);
 
   return (
-    <Box mb="90px">
+    <Box mb="110px">
       {items.length !== 0 && (
         <InputGroup mb={2}>
           <InputLeftAddon children={searchIcon} />

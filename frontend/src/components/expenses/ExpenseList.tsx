@@ -66,7 +66,7 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
   }, [expenses.length]);
 
   return (
-    <>
+    <Box mb="110px">
       <Box
         display="flex"
         justifyContent="space-between"
@@ -140,7 +140,7 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
           </Box>
         ))}
       </Box>
-    </>
+    </Box>
   );
 };
 

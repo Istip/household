@@ -7,7 +7,7 @@ const NotesList: React.FC = () => {
   const { notes } = useNotes();
 
   return (
-    <Box mb="90px">
+    <Box mb="110px">
       {notes.length === 0 && (
         <Box display="flex" justifyContent="center" alignItems="center" my={5}>
           <Text fontSize="xl" fontWeight="bold" color="gray.400">

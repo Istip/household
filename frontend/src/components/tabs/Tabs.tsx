@@ -41,6 +41,7 @@ const Tabs: React.FC<Props> = ({
         bottom={0}
         zIndex={2}
         background="white"
+        h="60px"
       >
         <Tab _selected={selected} onClick={() => setTabIndex(0)}>
           <Text as="div" fontSize="sm" fontWeight="bold">
