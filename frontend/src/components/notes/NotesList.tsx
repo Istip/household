@@ -1,24 +1,10 @@
 import { useNotes } from '../../context/NotesContext';
 import { Note } from '../';
 import { Note as INote } from '../../interfaces/Note';
-import { Box, Flex, Spinner, Text } from '@chakra-ui/react';
+import { Box, Text } from '@chakra-ui/react';
 
 const NotesList: React.FC = () => {
-  const { notes, loading } = useNotes();
-
-  if (loading) {
-    return (
-      <Flex justifyContent="center" p={5}>
-        <Spinner
-          thickness="4px"
-          speed="0.65s"
-          emptyColor="gray.200"
-          color="blue.500"
-          size="xl"
-        />
-      </Flex>
-    );
-  }
+  const { notes } = useNotes();
 
   return (
     <Box mb="110px">
