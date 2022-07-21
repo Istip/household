@@ -3,18 +3,21 @@ import { useNotes } from '../../context/NotesContext';
 import { Note as INote } from '../../interfaces/Note';
 import { Comments } from '../';
 import dayjs from 'dayjs';
+import { useState } from 'react';
 
 interface IProps {
   note: INote;
 }
 
 const Note: React.FC<IProps> = ({ note }) => {
+  const [confirm, setConfirm] = useState(false);
   const { deleteNote, loading } = useNotes();
   const { _id, text, createdAt, createdBy } = note;
 
   const toast = useToast();
 
   const deleteIcon = <i className="fa-solid fa-circle-xmark"></i>;
+  const confirmIcon = <i className="fa-solid fa-circle-check"></i>;
 
   const handleDelete = () => {
     toast({
@@ -42,12 +45,21 @@ const Note: React.FC<IProps> = ({ note }) => {
           </Box>
         </Box>
         {!loading ? (
-          <Text color="red.400" p={-1} onClick={handleDelete}>
-            {deleteIcon}
-          </Text>
-        ) : (
-          <Box></Box>
-        )}
+          <Box display="flex" gap={2}>
+            {confirm && (
+              <Text color="red.400" p={-1} onClick={handleDelete}>
+                {confirmIcon}
+              </Text>
+            )}
+            <Text
+              color={confirm ? 'gray.600' : 'red.400'}
+              p={-1}
+              onClick={() => setConfirm(!confirm)}
+            >
+              {deleteIcon}
+            </Text>
+          </Box>
+        ) : null}
       </Flex>
 
       <Divider my={4} />
