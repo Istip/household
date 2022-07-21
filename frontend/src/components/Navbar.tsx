@@ -28,7 +28,12 @@ const Navbar = () => {
 
       <Box alignItems="center" display="flex" gap="2">
         <Box>
-          <Button size="sm" onClick={logout}>
+          <Button
+            size="sm"
+            onClick={logout}
+            variant="outline"
+            colorScheme="blue"
+          >
             Logout
           </Button>
         </Box>

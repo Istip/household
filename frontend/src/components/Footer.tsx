@@ -120,7 +120,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
         borderColor="gray.200"
         zIndex={2}
       >
-        <Box>
+        <Box w="100%">
           <InputGroup size="sm">
             <InputLeftAddon
               children={tabOperations[tabIndex].icon}
