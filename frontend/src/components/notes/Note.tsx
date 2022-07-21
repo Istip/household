@@ -42,7 +42,7 @@ const Note: React.FC<IProps> = ({ note }) => {
   };
 
   return (
-    <Box p={5} borderRadius={12} mb={4} backgroundColor="white">
+    <Box p={5} borderRadius={12} mb={4} backgroundColor="white" boxShadow="lg">
       <Flex justifyContent="space-between" alignItems="center">
         <Box display="flex" gap={3} alignItems="center">
           <Avatar name={createdBy} size="xs" fontWeight="bold" />
