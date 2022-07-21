@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Box,
   Button,
@@ -10,27 +10,26 @@ import {
 import { useAuth } from '../context/AuthContext';
 import { useItems } from '../context/ItemContext';
 import { useNotes } from '../context/NotesContext';
-import { Expense } from '../interfaces/Expense';
+import { IExpense } from '../interfaces/Expense';
 import axios from '../helpers/axios';
 
 interface Props {
   tabIndex: number;
-  expenses: Expense[];
-  setExpenses: (expenses: Expense[]) => void;
+  expenses: IExpense[];
+  setExpenses: (expenses: IExpense[]) => void;
 }
 
 interface Operation {
   icon: JSX.Element;
   function: () => void;
-  text: string;
+  text: string | JSX.Element;
   type: 'text' | 'number';
-  colorScheme: 'blue' | 'yellow' | 'green' | 'red';
+  colorScheme: 'blue' | 'yellow' | 'green';
   placeholder: string;
 }
 
 const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
-  const [text, setText] = useState('');
-  const [expenseColor, setExpenseColor] = useState<'red' | 'green'>('green');
+  const [text, setText] = useState<string>('');
 
   const { createItem, loading } = useItems();
   const { createNote } = useNotes();
@@ -62,20 +61,21 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
     {
       icon: <i className="fa-solid fa-money-bill-wave"></i>,
       function: () => {
-        createExpense({ amount: text });
+        return createExpense({ amount: text });
       },
-      text: 'New Expense',
+      text: <i className="fa-solid fa-circle-plus fa-lg"></i>,
       type: 'number',
-      colorScheme: expenseColor,
+      colorScheme: 'green',
       placeholder: 'Enter the ammount...',
     },
   ];
 
-  const createExpense = (data: { amount: string }) => {
+  const createExpense = (data: { amount: string | number }) => {
     axios
       .post('/expenses', data)
       .then((res) => {
         setExpenses([res.data, ...expenses]);
+        setText('');
       })
       .catch((err) => {
         toast({
@@ -97,12 +97,25 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
     tabOperations[tabIndex].function();
   };
 
-  useEffect(() => {
-    if (tabIndex === 2 && text !== '') {
-      setExpenseColor(parseInt(text) > 0 ? 'green' : 'red');
-    }
-    // eslint-disable-next-line
-  }, [text]);
+  const ExtraButton = () => {
+    return (
+      <>
+        {tabIndex === 2 && (
+          <Button
+            colorScheme="red"
+            mr={1}
+            isLoading={loading}
+            size="sm"
+            onClick={() => {
+              return createExpense({ amount: -Math.abs(parseInt(text)) });
+            }}
+          >
+            <i className="fa-solid fa-circle-minus fa-lg"></i>
+          </Button>
+        )}
+      </>
+    );
+  };
 
   return (
     <form onSubmit={onSubmit}>
@@ -134,10 +147,12 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
               isRequired
               type={tabOperations[tabIndex].type}
               borderRadius="6px"
+              min={0}
             />
           </InputGroup>
         </Box>
-        <Box ml={1}>
+        <Box ml={1} display="flex">
+          <ExtraButton />
           <Button
             type="submit"
             colorScheme={tabOperations[tabIndex].colorScheme}

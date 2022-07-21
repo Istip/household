@@ -10,13 +10,13 @@ import {
 import { ItemsList, NotesList, ExpenseList } from '../';
 import { useItems } from '../../context/ItemContext';
 import { useNotes } from '../../context/NotesContext';
-import { Expense } from '../../interfaces/Expense';
+import { IExpense } from '../../interfaces/Expense';
 
 interface Props {
   tabIndex: number;
   setTabIndex: (index: number) => void;
-  expenses: Expense[];
-  setExpenses: (expenses: Expense[]) => void;
+  expenses: IExpense[];
+  setExpenses: (expenses: IExpense[]) => void;
 }
 
 const Tabs: React.FC<Props> = ({

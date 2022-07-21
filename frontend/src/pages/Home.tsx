@@ -3,11 +3,11 @@ import { Footer, Navbar, Tabs } from '../components';
 import ItemProvider from '../context/ItemContext';
 import NoteProvider from '../context/NotesContext';
 import useLocalStorage from '../hooks/useLocalStorage';
-import { Expense } from '../interfaces/Expense';
+import { IExpense } from '../interfaces/Expense';
 
 const Home: React.FC = () => {
   const [tabIndex, setTabIndex] = useLocalStorage('household-tab-index', 0);
-  const [expenses, setExpenses] = useState<Expense[]>([]);
+  const [expenses, setExpenses] = useState<IExpense[]>([]);
 
   return (
     <>
