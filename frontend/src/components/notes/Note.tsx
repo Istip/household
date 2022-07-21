@@ -1,4 +1,13 @@
-import { Avatar, Box, Divider, Flex, Text, useToast } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Divider,
+  Flex,
+  ScaleFade,
+  Text,
+  useDisclosure,
+  useToast,
+} from '@chakra-ui/react';
 import { useNotes } from '../../context/NotesContext';
 import { Note as INote } from '../../interfaces/Note';
 import { Comments } from '../';
@@ -13,6 +22,8 @@ const Note: React.FC<IProps> = ({ note }) => {
   const [confirm, setConfirm] = useState(false);
   const { deleteNote, loading } = useNotes();
   const { _id, text, createdAt, createdBy } = note;
+
+  const { isOpen, onToggle } = useDisclosure();
 
   const toast = useToast();
 
@@ -46,15 +57,20 @@ const Note: React.FC<IProps> = ({ note }) => {
         </Box>
         {!loading ? (
           <Box display="flex" gap={2}>
-            {confirm && (
-              <Text color="red.400" p={-1} onClick={handleDelete}>
-                {confirmIcon}
-              </Text>
-            )}
+            <ScaleFade initialScale={0.1} in={isOpen}>
+              {confirm && (
+                <Text color="red.400" p={-1} onClick={handleDelete}>
+                  {confirmIcon}
+                </Text>
+              )}
+            </ScaleFade>
             <Text
               color={confirm ? 'gray.600' : 'red.400'}
               p={-1}
-              onClick={() => setConfirm(!confirm)}
+              onClick={() => {
+                onToggle();
+                setConfirm(!confirm);
+              }}
             >
               {deleteIcon}
             </Text>
