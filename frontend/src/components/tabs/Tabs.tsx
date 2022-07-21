@@ -28,7 +28,12 @@ const Tabs: React.FC<Props> = ({
   const { notes } = useNotes();
   const { items } = useItems();
 
-  const selected = { color: 'white', bg: 'blue.300' };
+  const selected = {
+    color: 'white',
+    bg: 'blue.300',
+    borderTop: '1px solid',
+    borderColor: 'blue.300',
+  };
 
   return (
     <TabsWrapper isFitted variant="unstyled" index={tabIndex}>

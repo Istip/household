@@ -36,9 +36,10 @@ const ItemsList: React.FC = () => {
   return (
     <Box mb="110px">
       {items.length !== 0 && (
-        <InputGroup mb={2}>
-          <InputLeftAddon children={searchIcon} />
+        <InputGroup mb={2} size="sm">
+          <InputLeftAddon children={searchIcon} borderRadius="6px" />
           <Input
+            borderRadius="6px"
             type="text"
             value={searchText}
             onChange={onChange}
