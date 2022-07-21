@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import {
   FormControl,
   FormLabel,
@@ -20,9 +20,7 @@ const Register: React.FC = () => {
     password: '',
   });
 
-  const { register, error, loading, authReady } = useAuth();
-
-  const navigate = useNavigate();
+  const { register, error, loading } = useAuth();
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setData({
@@ -31,13 +29,9 @@ const Register: React.FC = () => {
     });
   };
 
-  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    await register(data);
-
-    if (authReady) {
-      navigate('/');
-    }
+    register(data);
   };
 
   return (
