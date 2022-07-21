@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,7 +5,6 @@ import {
   Navigate,
 } from 'react-router-dom';
 import { Register, Login, Home } from './pages/';
-import { Spin } from './components/';
 import { useAuth } from './context/AuthContext';
 
 function App() {
@@ -14,24 +12,22 @@ function App() {
 
   return (
     <Router>
-      <Suspense fallback={<Spin />}>
-        <Routes>
-          <Route
-            path="/"
-            element={user ? <Home /> : <Navigate replace to="/login" />}
-          />
-          <Route
-            path="/register"
-            element={!user ? <Register /> : <Navigate replace to="/" />}
-          />
-          <Route
-            path="/login"
-            element={!user ? <Login /> : <Navigate replace to="/" />}
-          />
+      <Routes>
+        <Route
+          path="/"
+          element={user ? <Home /> : <Navigate replace to="/login" />}
+        />
+        <Route
+          path="/register"
+          element={!user ? <Register /> : <Navigate replace to="/" />}
+        />
+        <Route
+          path="/login"
+          element={!user ? <Login /> : <Navigate replace to="/" />}
+        />
 
-          <Route path="*" element={<Navigate replace to="/" />} />
-        </Routes>
-      </Suspense>
+        <Route path="*" element={<Navigate replace to="/" />} />
+      </Routes>
     </Router>
   );
 }
