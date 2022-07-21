@@ -81,9 +81,6 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     const authed = localStorage.getItem('user');
     const data = authed && JSON.parse(authed);
     setUser(data);
-
-    console.log(data);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
