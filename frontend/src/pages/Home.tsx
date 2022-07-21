@@ -7,7 +7,6 @@ import { Expense } from '../interfaces/Expense';
 
 const Home: React.FC = () => {
   const [tabIndex, setTabIndex] = useLocalStorage('household-tab-index', 0);
-
   const [expenses, setExpenses] = useState<Expense[]>([]);
 
   return (
