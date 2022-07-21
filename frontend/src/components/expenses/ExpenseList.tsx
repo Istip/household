@@ -53,6 +53,7 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
             expenses={expenses}
             expense={expense}
             setExpenses={setExpenses}
+            getExpenses={getExpenses}
           />
         ))}
       </Box>

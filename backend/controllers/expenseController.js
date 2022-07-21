@@ -44,6 +44,30 @@ const createExpense = asyncHandler(async (req, res) => {
   res.status(201).json(expense);
 });
 
+// @desc    Update an existing expense
+// @route   PUT /api/expenses/:id
+// @access  PRIVATE
+const updateExpense = asyncHandler(async (req, res) => {
+  const user = await User.findById(req.user.id);
+
+  if (!user) {
+    res.status(401);
+    throw new Error('User not found');
+  }
+
+  const { id } = req.params;
+  const expense = await Expense.findById(id);
+
+  if (!expense) {
+    res.status(404);
+    throw new Error('Expense not found');
+  }
+
+  const updatedExpense = await Expense.findByIdAndUpdate(id, req.body);
+
+  res.status(200).json(updatedExpense);
+});
+
 // @desc    Delete an existing expense
 // @route   DELETE /api/expenses/:id
 // @access  PRIVATE
@@ -72,4 +96,4 @@ const deleteExpense = asyncHandler(async (req, res) => {
   res.status(200).json({ success: true });
 });
 
-module.exports = { getExpenses, createExpense, deleteExpense };
+module.exports = { getExpenses, createExpense, deleteExpense, updateExpense };

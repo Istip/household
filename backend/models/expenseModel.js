@@ -6,6 +6,10 @@ const expenseSchema = mongoose.Schema(
       type: Number,
       require: [true, 'Please add an amount'],
     },
+    description: {
+      type: String,
+      default: '',
+    },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
