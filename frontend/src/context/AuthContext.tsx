@@ -38,17 +38,15 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
     axios
       .post('/users', data)
-      .then(async (res) => {
-        const response = await res.data;
-
-        localStorage.setItem('user', JSON.stringify(response));
-        setUser(response);
-        setAuthReady(true);
+      .then((res) => {
+        localStorage.setItem('user', JSON.stringify(res.data));
+        setUser(res.data);
       })
       .catch((err) => {
         setError(err.response.data.message);
       })
       .finally(() => {
+        setAuthReady(true);
         setLoading(false);
       });
   };
@@ -61,16 +59,14 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     axios
       .post('/users/login', data)
       .then((res) => {
-        const response = res.data;
-
-        localStorage.setItem('user', JSON.stringify(response));
-        setUser(response);
-        setAuthReady(true);
+        localStorage.setItem('user', JSON.stringify(res.data));
+        setUser(res.data);
       })
       .catch((err) => {
         setError(err.response.data.message);
       })
       .finally(() => {
+        setAuthReady(true);
         setLoading(false);
       });
   };
@@ -83,12 +79,12 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
 
   useEffect(() => {
     const authed = localStorage.getItem('user');
+    const data = authed && JSON.parse(authed);
+    setUser(data);
 
-    if (!user && typeof authed === 'string') {
-      const data = JSON.parse(authed);
-      setUser(data);
-    }
-  }, [user]);
+    console.log(data);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <AuthContext.Provider

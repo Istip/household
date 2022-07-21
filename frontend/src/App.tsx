@@ -25,7 +25,6 @@ function App() {
           path="/login"
           element={!user ? <Login /> : <Navigate replace to="/" />}
         />
-
         <Route path="*" element={<Navigate replace to="/" />} />
       </Routes>
     </Router>
