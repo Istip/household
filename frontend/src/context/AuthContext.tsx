@@ -13,7 +13,6 @@ interface IState {
   register: (data: { name: string; email: string; password: string }) => void;
   logout: () => void;
   loading: boolean;
-  authReady: boolean;
   error: string;
 }
 
@@ -25,7 +24,6 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [authReady, setAuthReady] = useState(false);
 
   const register = (data: {
     name: string;
@@ -34,7 +32,6 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   }) => {
     setLoading(true);
     setError('');
-    setAuthReady(false);
 
     axios
       .post('/users', data)
@@ -46,15 +43,13 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
         setError(err.response.data.message);
       })
       .finally(() => {
-        setAuthReady(true);
         setLoading(false);
       });
   };
 
-  const login = (data: { email: string; password: string }) => {
+  const login = async (data: { email: string; password: string }) => {
     setLoading(true);
     setError('');
-    setAuthReady(false);
 
     axios
       .post('/users/login', data)
@@ -66,7 +61,6 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
         setError(err.response.data.message);
       })
       .finally(() => {
-        setAuthReady(true);
         setLoading(false);
       });
   };
@@ -74,18 +68,19 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const logout = () => {
     localStorage.removeItem('user');
     setUser(null);
-    setAuthReady(false);
   };
 
   useEffect(() => {
-    const authed = localStorage.getItem('user');
-    const data = authed && JSON.parse(authed);
-    setUser(data);
-  }, []);
+    if (!user) {
+      const authed = localStorage.getItem('user');
+      const data = authed && JSON.parse(authed);
+      setUser(data);
+    }
+  }, [user]);
 
   return (
     <AuthContext.Provider
-      value={{ user, login, register, logout, loading, authReady, error }}
+      value={{ user, login, register, logout, loading, error }}
     >
       {children}
     </AuthContext.Provider>
