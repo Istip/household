@@ -17,9 +17,9 @@ const ExpenseTotal: React.FC<Props> = ({ expenses }) => {
       display="flex"
       justifyContent="space-between"
       alignItems="center"
-      background="gray.50"
-      p={5}
+      background={totalExpenses <= 0 ? 'red.100' : 'green.100'}
       borderRadius="10px"
+      p={5}
     >
       <Box>
         <Text fontWeight="bold" fontSize="2xl">
