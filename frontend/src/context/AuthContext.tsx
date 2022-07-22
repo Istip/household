@@ -56,6 +56,7 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
       .then((res) => {
         localStorage.setItem('user', JSON.stringify(res.data));
         setUser(res.data);
+        window.location.reload();
       })
       .catch((err) => {
         setError(err.response.data.message);
