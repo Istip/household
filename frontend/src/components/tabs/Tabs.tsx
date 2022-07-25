@@ -31,15 +31,13 @@ const Tabs: React.FC<Props> = ({
   const selected = {
     color: 'white',
     bg: 'blue.300',
-    borderTop: '1px solid',
-    borderColor: 'blue.300',
   };
 
   return (
     <TabsWrapper isFitted variant="unstyled" index={tabIndex}>
       <TabList
         borderTop="1px solid"
-        borderColor="blue.300"
+        borderColor="gray.100"
         position="fixed"
         left={0}
         right={0}
@@ -51,8 +49,7 @@ const Tabs: React.FC<Props> = ({
         <Tab _selected={selected} onClick={() => setTabIndex(0)}>
           <Box fontSize="sm" fontWeight="bold" position="relative">
             <i className="fa-solid fa-lg fa-cart-shopping"></i>
-
-            {items.length ? (
+            {items.length && (
               <Badge
                 position="absolute"
                 right="calc(50% - 16px)"
@@ -65,14 +62,14 @@ const Tabs: React.FC<Props> = ({
               >
                 {items.length}
               </Badge>
-            ) : null}
+            )}
           </Box>
         </Tab>
         <Tab _selected={selected} onClick={() => setTabIndex(1)}>
           <Box fontSize="sm" fontWeight="bold" position="relative">
             <i className="fa-solid fa-lg fa-comment"></i>
 
-            {notes.length ? (
+            {notes.length && (
               <Badge
                 position="absolute"
                 right="calc(50% - 16px)"
@@ -85,7 +82,7 @@ const Tabs: React.FC<Props> = ({
               >
                 {notes.length}
               </Badge>
-            ) : null}
+            )}
           </Box>
         </Tab>
         <Tab _selected={selected} onClick={() => setTabIndex(2)}>

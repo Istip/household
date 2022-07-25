@@ -7,7 +7,7 @@
     "start": "node backend/server.js",
     "dev": "nodemon backend/server.js",
     "react": "npm run start --prefix frontend",
-    "develop": "concurrently --names \"NODE,REACT\" -c \"bgGreen.bold,bgCyan.bold\" \"npm run dev\" \"npm run react\"",
+    "develop": "concurrently --names \"NODE,REACT\" -c \"bgGreen,bgCyan\" \"npm run dev\" \"npm run react\"",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix frontend && npm run build --prefix frontend"
   },
   "keywords": [],

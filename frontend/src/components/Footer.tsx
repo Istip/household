@@ -105,7 +105,6 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
             colorScheme="red"
             mr={1}
             isLoading={loading}
-            size="sm"
             onClick={() => {
               return createExpense({ amount: -Math.abs(parseInt(text)) });
             }}
@@ -134,7 +133,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
         zIndex={2}
       >
         <Box w="100%">
-          <InputGroup size="sm">
+          <InputGroup>
             <InputLeftAddon
               children={tabOperations[tabIndex].icon}
               borderRadius="6px"
@@ -157,7 +156,6 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
             type="submit"
             colorScheme={tabOperations[tabIndex].colorScheme}
             isLoading={loading}
-            size="sm"
           >
             {tabOperations[tabIndex].text}
           </Button>
