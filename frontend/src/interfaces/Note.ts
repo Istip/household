@@ -1,10 +1,10 @@
 export interface Note {
-  _id: string;
+  readonly _id: string;
   text: string;
   description?: string;
   createdBy: string;
-  createdAt: string;
-  updatedAt: string;
+  readonly createdAt: string;
+  readonly updatedAt: string;
   comments: Comment[];
   __v?: number;
 }
@@ -12,5 +12,5 @@ export interface Note {
 interface Comment {
   text: string;
   createdBy: string;
-  createdAt: Date;
+  readonly createdAt: Date;
 }

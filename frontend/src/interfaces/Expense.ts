@@ -1,8 +1,8 @@
 export interface IExpense {
-  _id: string;
+  readonly _id: string;
   amount: number;
   description?: string;
   user: string;
-  createdAt: Date;
-  updatedAt: Date;
+  readonly createdAt: Date;
+  readonly pdatedAt: Date;
 }

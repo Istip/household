@@ -1,9 +1,9 @@
 export interface Item {
-  _id: string;
+  readonly _id: string;
   name: string;
   createdBy: string;
   completed: boolean;
-  createdAt: string;
-  updatedAt: string;
-  __v?: number;
+  readonly createdAt: string;
+  readonly updatedAt: string;
+  readonly __v?: number;
 }
