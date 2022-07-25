@@ -38,7 +38,7 @@ const Item: React.FC<IProps> = ({ item }) => {
       title: <Text fontSize="sm">Deleted: {name}</Text>,
       position: 'top',
       isClosable: true,
-      status: 'error',
+      status: 'success',
     });
 
     deleteItem(_id);

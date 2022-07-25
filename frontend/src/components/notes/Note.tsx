@@ -35,7 +35,7 @@ const Note: React.FC<IProps> = ({ note }) => {
       title: <Text fontSize="sm">Deleted: {note.text}</Text>,
       position: 'top',
       isClosable: true,
-      status: 'error',
+      status: 'success',
     });
 
     deleteNote(_id);

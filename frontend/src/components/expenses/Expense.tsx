@@ -48,7 +48,7 @@ const Expense: React.FC<Props> = ({
           title: <Text fontSize="sm">Deleted expense: {amount}</Text>,
           position: 'top',
           isClosable: true,
-          status: 'error',
+          status: 'success',
         });
       })
       .catch((err) => {
