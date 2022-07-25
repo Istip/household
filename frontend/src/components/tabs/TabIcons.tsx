@@ -15,8 +15,8 @@ const TabIcons: React.FC<{ setTabIndex: (index: number) => void }> = ({
   const { items } = useItems();
 
   const selected = {
-    color: 'white',
-    bg: 'blue.300',
+    color: 'blue.300',
+    bg: 'blue.50',
   };
 
   const tabContent: tabItem[] = [
@@ -46,7 +46,7 @@ const TabIcons: React.FC<{ setTabIndex: (index: number) => void }> = ({
         >
           <Box fontSize="sm" fontWeight="bold" position="relative">
             {tab.icon}
-            {tab.badge && (
+            {tab.badge ? (
               <Badge
                 position="absolute"
                 right="calc(50% - 16px)"
@@ -59,7 +59,7 @@ const TabIcons: React.FC<{ setTabIndex: (index: number) => void }> = ({
               >
                 {tab.badge}
               </Badge>
-            )}
+            ) : null}
           </Box>
         </Tab>
       ))}
