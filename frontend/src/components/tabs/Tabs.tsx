@@ -1,16 +1,12 @@
 import {
-  Badge,
-  Box,
-  Tab,
   TabList,
   TabPanel,
   TabPanels,
   Tabs as TabsWrapper,
 } from '@chakra-ui/react';
 import { ItemsList, NotesList, ExpenseList } from '../';
-import { useItems } from '../../context/ItemContext';
-import { useNotes } from '../../context/NotesContext';
 import { IExpense } from '../../interfaces/Expense';
+import TabIcons from './TabIcons';
 
 interface Props {
   tabIndex: number;
@@ -25,14 +21,6 @@ const Tabs: React.FC<Props> = ({
   expenses,
   setExpenses,
 }) => {
-  const { notes } = useNotes();
-  const { items } = useItems();
-
-  const selected = {
-    color: 'white',
-    bg: 'blue.300',
-  };
-
   return (
     <TabsWrapper isFitted variant="unstyled" index={tabIndex}>
       <TabList
@@ -46,50 +34,7 @@ const Tabs: React.FC<Props> = ({
         background="white"
         h="60px"
       >
-        <Tab _selected={selected} onClick={() => setTabIndex(0)}>
-          <Box fontSize="sm" fontWeight="bold" position="relative">
-            <i className="fa-solid fa-lg fa-cart-shopping"></i>
-            {items.length && (
-              <Badge
-                position="absolute"
-                right="calc(50% - 16px)"
-                top="-6px"
-                fontSize="8px"
-                borderRadius="full"
-                colorScheme="red"
-                variant="solid"
-                ml={2}
-              >
-                {items.length}
-              </Badge>
-            )}
-          </Box>
-        </Tab>
-        <Tab _selected={selected} onClick={() => setTabIndex(1)}>
-          <Box fontSize="sm" fontWeight="bold" position="relative">
-            <i className="fa-solid fa-lg fa-comment"></i>
-
-            {notes.length && (
-              <Badge
-                position="absolute"
-                right="calc(50% - 16px)"
-                top="-6px"
-                fontSize="9px"
-                borderRadius="full"
-                colorScheme="red"
-                variant="solid"
-                ml={2}
-              >
-                {notes.length}
-              </Badge>
-            )}
-          </Box>
-        </Tab>
-        <Tab _selected={selected} onClick={() => setTabIndex(2)}>
-          <Box as="div" fontSize="sm" fontWeight="bold">
-            <i className="fa-solid fa-lg fa-money-bill-wave"></i>
-          </Box>
-        </Tab>
+        <TabIcons setTabIndex={setTabIndex} />
       </TabList>
 
       <TabPanels mt="72px">
