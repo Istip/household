@@ -103,6 +103,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
         {tabIndex === 2 && (
           <Button
             colorScheme="red"
+            bgGradient="linear(to-l, red.700, red.500)"
             mr={1}
             isLoading={loading}
             onClick={() => {
