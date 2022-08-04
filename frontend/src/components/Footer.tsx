@@ -26,6 +26,7 @@ interface Operation {
   type: 'text' | 'number';
   colorScheme: 'blue' | 'yellow' | 'green';
   placeholder: string;
+  gradient: string;
 }
 
 const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
@@ -46,6 +47,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
       text: 'New Item',
       type: 'text',
       colorScheme: 'blue',
+      gradient: 'linear(to-bl, #0093E9, #80D0C7)',
       placeholder: 'Add item to the list...',
     },
     {
@@ -56,6 +58,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
       text: 'New Note',
       type: 'text',
       colorScheme: 'yellow',
+      gradient: 'linear(to-bl, #85FFBD, #FFFB7D)',
       placeholder: 'Leave a note...',
     },
     {
@@ -66,6 +69,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
       text: <i className="fa-solid fa-circle-plus fa-lg"></i>,
       type: 'number',
       colorScheme: 'green',
+      gradient: 'linear(to-bl, #16A085, #5ddb09)',
       placeholder: 'Enter the ammount...',
     },
   ];
@@ -103,7 +107,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
         {tabIndex === 2 && (
           <Button
             colorScheme="red"
-            bgGradient="linear(to-l, red.700, red.500)"
+            bgGradient="linear(to-bl, red.700, red.500)"
             mr={1}
             isLoading={loading}
             onClick={() => {
@@ -157,6 +161,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
             type="submit"
             colorScheme={tabOperations[tabIndex].colorScheme}
             isLoading={loading}
+            bgGradient={tabOperations[tabIndex].gradient}
           >
             {tabOperations[tabIndex].text}
           </Button>
