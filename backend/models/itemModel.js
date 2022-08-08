@@ -4,12 +4,13 @@ const itemSchema = mongoose.Schema(
   {
     name: {
       type: String,
-      require: [true, 'Please add a name'],
+      required: [true, 'Please add a name'],
     },
     completed: {
       type: Boolean,
       default: false,
     },
+    image: { type: String, required: false },
     createdBy: {
       type: String,
       required: [true, 'Please add the name of the user who created this item'],

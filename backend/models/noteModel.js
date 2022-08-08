@@ -4,7 +4,7 @@ const noteSchema = mongoose.Schema(
   {
     text: {
       type: String,
-      require: [true, 'Please add text for your note'],
+      required: [true, 'Please add text for your note'],
     },
     createdBy: {
       type: String,

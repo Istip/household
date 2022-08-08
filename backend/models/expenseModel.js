@@ -4,7 +4,7 @@ const expenseSchema = mongoose.Schema(
   {
     amount: {
       type: Number,
-      require: [true, 'Please add an amount'],
+      required: [true, 'Please add an amount'],
     },
     description: {
       type: String,
