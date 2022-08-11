@@ -69,7 +69,7 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
             <Box
               fontSize="10px"
               color={marked ? 'yellow.600' : 'gray.400'}
-              minW="55px"
+              minW="60px"
             >
               {dayjs(comment.createdAt).format('MMM DD, HH:mm')}
             </Box>
