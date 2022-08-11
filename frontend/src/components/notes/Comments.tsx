@@ -5,7 +5,10 @@ import { useNotes } from '../../context/NotesContext';
 import { useAuth } from '../../context/AuthContext';
 import dayjs from 'dayjs';
 
-const Comments: React.FC<{ note: Note }> = ({ note }) => {
+const Comments: React.FC<{ note: Note; marked: boolean }> = ({
+  note,
+  marked,
+}) => {
   const [comment, setComment] = useState('');
 
   const { updateNote, loading } = useNotes();
@@ -42,7 +45,7 @@ const Comments: React.FC<{ note: Note }> = ({ note }) => {
   return (
     <>
       <Box
-        bg="gray.50"
+        bg={marked ? 'yellow.100' : 'gray.50'}
         p={comments.length ? 1 : 0}
         pt={comments.length ? 2 : 0}
         borderRadius={comments.length ? 10 : 0}
@@ -63,7 +66,11 @@ const Comments: React.FC<{ note: Note }> = ({ note }) => {
               </Box>
             </Box>
 
-            <Box fontSize="10px" color="gray.400" minW="55px">
+            <Box
+              fontSize="10px"
+              color={marked ? 'yellow.600' : 'gray.400'}
+              minW="55px"
+            >
               {dayjs(comment.createdAt).format('MMM DD, HH:mm')}
             </Box>
           </Flex>

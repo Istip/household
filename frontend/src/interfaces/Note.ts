@@ -6,7 +6,8 @@ export interface Note {
   readonly createdAt: string;
   readonly updatedAt: string;
   comments: Comment[];
-  __v?: number;
+  readonly __v?: number;
+  marked: boolean;
 }
 
 interface Comment {
