@@ -11,8 +11,8 @@ export interface Note {
 }
 
 export interface Comment {
-  readonly _id: string;
+  _id: string;
   text: string;
   createdBy: string;
-  readonly createdAt: Date;
+  createdAt: Date;
 }

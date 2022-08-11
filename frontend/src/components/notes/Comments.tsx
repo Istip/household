@@ -27,7 +27,7 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
           {
             text: comment,
             createdBy: user!.name,
-            _id: `${Date.now().toString()}${Math.random().toString()}`,
+            _id: `${Date.now().toString()}${Math.random()}`,
           },
         ],
       };
@@ -51,12 +51,12 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
         pt={comments.length ? 2 : 0}
         borderRadius={comments.length ? 10 : 0}
       >
-        {comments.map((comment) => (
+        {comments.map((item) => (
           <Comment
-            key={comment._id}
+            key={item._id}
             note={note}
             marked={marked}
-            comment={comment}
+            comment={item}
             comments={comments}
           />
         ))}
