@@ -2,7 +2,6 @@ import { useState } from 'react';
 import {
   Avatar,
   Box,
-  Button,
   Divider,
   Flex,
   ScaleFade,
@@ -65,22 +64,6 @@ const Note: React.FC<IProps> = ({ note }) => {
       borderColor={marked ? 'yellow.400' : 'gray.200'}
       position="relative"
     >
-      <Flex position="absolute" top="-12px" left="-6px" color="yellow.500">
-        <Button
-          position="absolute"
-          colorScheme={marked ? 'yellow' : 'gray'}
-          border="1px solid"
-          borderColor={!marked ? 'yellow.500' : 'yellow.400'}
-          borderRadius="full"
-          onClick={handleMark}
-          size="xs"
-          w="24px"
-          h="24px"
-          isLoading={loading}
-        >
-          {bookmarkIcon}
-        </Button>
-      </Flex>
       <Flex justifyContent="space-between" alignItems="center">
         <Box display="flex" gap={3} alignItems="center">
           <Avatar name={createdBy} size="xs" fontWeight="bold" />
@@ -95,6 +78,14 @@ const Note: React.FC<IProps> = ({ note }) => {
         </Box>
         {!loading ? (
           <Box display="flex" gap={2}>
+            <Text
+              p={-1}
+              mr={confirm ? 3 : 0}
+              onClick={handleMark}
+              color={isMarked ? 'yellow.500' : 'gray.600'}
+            >
+              {bookmarkIcon}
+            </Text>
             <ScaleFade initialScale={0.1} in={isOpen}>
               {confirm && (
                 <Text color="red.400" p={-1} onClick={handleDelete}>
@@ -116,9 +107,9 @@ const Note: React.FC<IProps> = ({ note }) => {
         ) : null}
       </Flex>
 
-      <Divider my={4} bg="gray.200" />
+      <Divider my={4} />
       <Text fontWeight="bold">{text}</Text>
-      <Divider my={4} bg="gray.200" />
+      <Divider my={4} />
       <Comments note={note} marked={marked} />
     </Box>
   );
