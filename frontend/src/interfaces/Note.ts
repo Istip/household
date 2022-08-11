@@ -10,7 +10,8 @@ export interface Note {
   marked: boolean;
 }
 
-interface Comment {
+export interface Comment {
+  readonly _id: string;
   text: string;
   createdBy: string;
   readonly createdAt: Date;

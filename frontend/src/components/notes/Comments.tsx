@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { Avatar, Box, Button, Flex, Input, Text } from '@chakra-ui/react';
+import { Box, Button, Input } from '@chakra-ui/react';
 import { Note } from '../../interfaces/Note';
 import { useNotes } from '../../context/NotesContext';
 import { useAuth } from '../../context/AuthContext';
-import dayjs from 'dayjs';
+import Comment from './Comment';
 
 const Comments: React.FC<{ note: Note; marked: boolean }> = ({
   note,
@@ -27,6 +27,7 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
           {
             text: comment,
             createdBy: user!.name,
+            _id: `${Date.now().toString()}${Math.random().toString()}`,
           },
         ],
       };
@@ -51,29 +52,13 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
         borderRadius={comments.length ? 10 : 0}
       >
         {comments.map((comment) => (
-          <Flex
-            key={Math.random()}
-            gap={2}
-            alignItems="flex-start"
-            justifyContent="space-between"
-            mb={1}
-            p={1}
-          >
-            <Box display="flex" alignItems="flex-start" gap={2}>
-              <Avatar size="2xs" name={comment.createdBy} />
-              <Box>
-                <Text fontSize="xs">{comment.text}</Text>
-              </Box>
-            </Box>
-
-            <Box
-              fontSize="10px"
-              color={marked ? 'yellow.600' : 'gray.400'}
-              minW="60px"
-            >
-              {dayjs(comment.createdAt).format('MMM DD, HH:mm')}
-            </Box>
-          </Flex>
+          <Comment
+            key={comment._id}
+            note={note}
+            marked={marked}
+            comment={comment}
+            comments={comments}
+          />
         ))}
       </Box>
 
