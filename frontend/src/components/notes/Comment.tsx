@@ -91,7 +91,6 @@ const Comment: React.FC<Props> = ({ note, marked, comment, comments }) => {
         color={marked ? 'yellow.600' : 'gray.400'}
         minW="50px"
         opacity={isDelete ? 0 : 1}
-        onClick={() => console.log(comment)}
       >
         {dayjs(comment.createdAt).format('MMM DD, HH:mm')}
       </Box>
