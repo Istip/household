@@ -8,9 +8,11 @@ const {
   deleteItem,
 } = require('../controllers/itemController');
 
-router.get('/', protect, getItems);
-router.post('/', protect, createItem);
-router.put('/:id', protect, updateItem);
-router.delete('/:id', protect, deleteItem);
+router.use(protect);
+
+router.get('/', getItems);
+router.post('/', createItem);
+router.put('/:id', updateItem);
+router.delete('/:id', deleteItem);
 
 module.exports = router;

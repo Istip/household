@@ -8,9 +8,11 @@ const {
   deleteNote,
 } = require('../controllers/noteController');
 
-router.get('/', protect, getNotes);
-router.post('/', protect, createNote);
-router.put('/:id', protect, updateNote);
-router.delete('/:id', protect, deleteNote);
+router.use(protect);
+
+router.get('/', getNotes);
+router.post('/', createNote);
+router.put('/:id', updateNote);
+router.delete('/:id', deleteNote);
 
 module.exports = router;
