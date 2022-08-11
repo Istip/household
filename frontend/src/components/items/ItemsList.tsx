@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
-import { Box, Input, InputGroup, InputLeftAddon, Text } from '@chakra-ui/react';
+import { Box, Input, InputGroup, InputLeftAddon } from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
 import { Item as IItem } from '../../interfaces/Item';
 import { Item } from '../';
+import Loading from '../loading/Loading';
 
 const ItemsList: React.FC = () => {
   const { items } = useItems();
@@ -50,9 +51,7 @@ const ItemsList: React.FC = () => {
 
       {filteredItems.length === 0 && (
         <Box display="flex" justifyContent="center" alignItems="center" my={5}>
-          <Text fontSize="xl" fontWeight="bold" color="gray.400">
-            No items found...
-          </Text>
+          <Loading />
         </Box>
       )}
 

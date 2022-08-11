@@ -1,7 +1,8 @@
 import { useNotes } from '../../context/NotesContext';
 import { Note } from '../';
 import { Note as INote } from '../../interfaces/Note';
-import { Box, Text } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
+import Loading from '../loading/Loading';
 
 const NotesList: React.FC = () => {
   const { notes } = useNotes();
@@ -10,9 +11,7 @@ const NotesList: React.FC = () => {
     <Box mb="118px">
       {notes.length === 0 && (
         <Box display="flex" justifyContent="center" alignItems="center" my={5}>
-          <Text fontSize="xl" fontWeight="bold" color="gray.400">
-            You don't have any notes...
-          </Text>
+          <Loading />
         </Box>
       )}
 
