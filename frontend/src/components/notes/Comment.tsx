@@ -47,6 +47,7 @@ const Comment: React.FC<Props> = ({ note, marked, comment, comments }) => {
           justifyContent="center"
           alignItems="center"
           borderRadius="md"
+          p={2}
         >
           <Button
             w="100%"
