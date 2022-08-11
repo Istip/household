@@ -34,7 +34,7 @@ const Tabs: React.FC<Props> = ({
         background="white"
         h="60px"
       >
-        <TabIcons setTabIndex={setTabIndex} />
+        <TabIcons setTabIndex={setTabIndex} expenses={expenses} />
       </TabList>
 
       <TabPanels mt="72px">

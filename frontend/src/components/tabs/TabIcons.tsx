@@ -1,10 +1,12 @@
 import { Badge, Box, Tab } from '@chakra-ui/react';
 import { useItems } from '../../context/ItemContext';
 import { useNotes } from '../../context/NotesContext';
+import { IExpense } from '../../interfaces/Expense';
 
-const TabIcons: React.FC<{ setTabIndex: (index: number) => void }> = ({
-  setTabIndex,
-}) => {
+const TabIcons: React.FC<{
+  setTabIndex: (index: number) => void;
+  expenses: IExpense[];
+}> = ({ setTabIndex, expenses }) => {
   interface tabItem {
     index: number;
     icon: JSX.Element;
@@ -18,6 +20,12 @@ const TabIcons: React.FC<{ setTabIndex: (index: number) => void }> = ({
     color: 'blue.300',
     bg: 'blue.50',
   };
+
+  const totalExpenses =
+    expenses.length &&
+    expenses.reduce((acc, curr) => {
+      return acc + curr.amount;
+    }, 0);
 
   const tabContent: tabItem[] = [
     {
@@ -33,6 +41,7 @@ const TabIcons: React.FC<{ setTabIndex: (index: number) => void }> = ({
     {
       index: 2,
       icon: <i className="fa-solid fa-lg fa-money-bill-wave"></i>,
+      badge: totalExpenses,
     },
   ];
 
@@ -53,7 +62,7 @@ const TabIcons: React.FC<{ setTabIndex: (index: number) => void }> = ({
                 top="-6px"
                 fontSize="8px"
                 borderRadius="full"
-                colorScheme="red"
+                colorScheme={tab.badge > 0 && tab.index === 2 ? 'green' : 'red'}
                 variant="solid"
                 ml={2}
               >
