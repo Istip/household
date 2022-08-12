@@ -52,7 +52,7 @@ const Comment: React.FC<Props> = ({ note, marked, comment, comments }) => {
           <Button
             w="100%"
             size="xs"
-            colorScheme="gray"
+            colorScheme={marked ? 'blackAlpha' : 'gray'}
             isLoading={loading}
             onClick={() => setIsDelete(false)}
           >

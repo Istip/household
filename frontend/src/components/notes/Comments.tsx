@@ -1,5 +1,12 @@
 import { useState } from 'react';
-import { Box, Button, Input } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Button,
+  Input,
+  InputGroup,
+  InputLeftAddon,
+} from '@chakra-ui/react';
 import { Note } from '../../interfaces/Note';
 import { useNotes } from '../../context/NotesContext';
 import { useAuth } from '../../context/AuthContext';
@@ -64,20 +71,25 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
 
       <form onSubmit={handleAddComment}>
         <Box display="flex" gap={2} mt={3}>
-          <Input
-            background="white"
-            size="xs"
-            placeholder="Leave a comment..."
-            value={comment}
-            onChange={onChange}
-            isRequired
-          />
+          <InputGroup size="xs">
+            <InputLeftAddon
+              children={<Avatar size="2xs" name={user!.name} />}
+            />
+            <Input
+              background="white"
+              placeholder="Leave a comment..."
+              value={comment}
+              onChange={onChange}
+              isRequired
+            />
+          </InputGroup>
           <Button
             type="submit"
             leftIcon={createIcon}
             size="xs"
             px={3}
             isLoading={loading}
+            colorScheme={note.marked ? 'blackAlpha' : 'gray'}
           >
             Send
           </Button>
