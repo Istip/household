@@ -125,7 +125,7 @@ const Footer: React.FC<Props> = ({ tabIndex, expenses, setExpenses }) => {
     <form onSubmit={onSubmit}>
       <Box
         position="fixed"
-        bottom="60px"
+        bottom="59px"
         right={0}
         left={0}
         background="gray.50"
