@@ -61,6 +61,10 @@ const Item: React.FC<IProps> = ({ item }) => {
     setText(e.target.value);
   };
 
+  const trashIcon = <i className="fa-solid fa-trash-can"></i>;
+  const checkIcon = <i className="fa-solid fa-circle-check"></i>;
+  const editIcon = <i className="fa-solid fa-square-pen"></i>;
+
   return (
     <Box
       p={5}
@@ -90,7 +94,7 @@ const Item: React.FC<IProps> = ({ item }) => {
             onClick={handleDelete}
             isLoading={loading}
           >
-            <i className="fa-solid fa-trash"></i>
+            {trashIcon}
           </Button>
           <Button
             colorScheme="green"
@@ -98,7 +102,7 @@ const Item: React.FC<IProps> = ({ item }) => {
             onClick={handleComplete}
             isLoading={loading}
           >
-            <i className="fa-solid fa-circle-check"></i>
+            {checkIcon}
           </Button>
         </Box>
       </Box>
@@ -107,13 +111,10 @@ const Item: React.FC<IProps> = ({ item }) => {
       </Box>
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Box>
-          {createdAt !== updatedAt ? (
-            <Text fontSize="xs" fontWeight="light" color="telegram.300">
-              <i className="fa-solid fa-square-pen"></i>{' '}
-              {dayjs(updatedAt).format('MMM DD, HH:mm')}
+          {createdAt !== updatedAt && (
+            <Text fontSize="xs" fontWeight="light" color="blue.300">
+              {editIcon} {dayjs(updatedAt).format('MMM DD, HH:mm')}
             </Text>
-          ) : (
-            ''
           )}
         </Box>
 
@@ -125,7 +126,7 @@ const Item: React.FC<IProps> = ({ item }) => {
             color="gray.400"
             mr={1}
           >
-            <i className="fa-solid fa-clock"></i>
+            {editIcon}
           </Text>
 
           <Text
