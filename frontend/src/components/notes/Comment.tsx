@@ -22,8 +22,8 @@ const Comment: React.FC<Props> = ({ note, marked, comment, comments }) => {
     updateNote(note._id, data);
   };
 
-  const trashIcon = <i className="fa-solid fa-trash"></i>;
-  const backIcon = <i className="fa-solid fa-arrow-left"></i>;
+  const trashIcon = <i className="fa-solid fa-trash-can"></i>;
+  const backIcon = <i className="fa-solid fa-circle-arrow-left"></i>;
 
   return (
     <Flex
