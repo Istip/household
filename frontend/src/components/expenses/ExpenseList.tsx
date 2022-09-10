@@ -4,6 +4,7 @@ import axios from '../../helpers/axios';
 import { IExpense } from '../../interfaces/Expense';
 import Expense from './Expense';
 import ExpenseTotal from './ExpenseTotal';
+import dayjs from 'dayjs';
 
 interface Props {
   expenses: IExpense[];
@@ -34,6 +35,15 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
     // eslint-disable-next-line
   }, [expenses.length]);
 
+  const getDate = (index: number): any => {
+    if (index !== 0 && expenses[index - 1].createdAt) {
+      return (
+        dayjs(expenses[index - 1].createdAt).format('MM') !==
+        dayjs(expenses[index].createdAt).format('MM')
+      );
+    }
+  };
+
   return (
     <Box mb="110px">
       <ExpenseTotal expenses={expenses} />
@@ -47,14 +57,20 @@ const ExpenseList: React.FC<Props> = ({ expenses, setExpenses }) => {
       )}
 
       <Box mt={2}>
-        {expenses.map((expense) => (
-          <Expense
-            key={expense._id}
-            expenses={expenses}
-            expense={expense}
-            setExpenses={setExpenses}
-            getExpenses={getExpenses}
-          />
+        {expenses.map((expense: IExpense, index: number) => (
+          <Box key={expense._id}>
+            {getDate(index) && (
+              <Text fontWeight="bold" fontSize="sm" mt={2} color="blue.500">
+                {dayjs(expense.createdAt).format('MMMM')}:
+              </Text>
+            )}
+            <Expense
+              expenses={expenses}
+              expense={expense}
+              setExpenses={setExpenses}
+              getExpenses={getExpenses}
+            />
+          </Box>
         ))}
       </Box>
     </Box>
