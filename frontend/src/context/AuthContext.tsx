@@ -71,6 +71,8 @@ export const AuthContextProvider: React.FC<{ children: React.ReactNode }> = ({
     setUser(null);
   };
 
+  // dummy comment
+
   useEffect(() => {
     if (!user) {
       const authed = localStorage.getItem('user');
