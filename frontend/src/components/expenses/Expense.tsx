@@ -90,6 +90,7 @@ const Expense: React.FC<Props> = ({
       <Popover>
         <PopoverTrigger>
           <Box
+            w="100%"
             key={expense._id}
             display="flex"
             alignItems="center"
@@ -98,10 +99,24 @@ const Expense: React.FC<Props> = ({
             p={1}
             background={expense.amount >= 0 ? 'green.50' : 'red.50'}
           >
-            <Box color="gray.600" pl={2} w="100%">
+            <Box color="gray.600" px={2} w="100px">
               <i className="fa-solid fa-clock"></i>{' '}
               {dayjs(expense.createdAt).format('MMM DD, HH:mm')}
             </Box>
+
+            {expense.description && (
+              <Box display="flex" justifyContent="center" alignItems="center">
+                <Text
+                  fontSize="xx-small"
+                  as="span"
+                  color={expense.amount >= 0 ? 'green.300' : 'red.300'}
+                  textAlign="center"
+                >
+                  {expense.description.substring(0, 30)}
+                  {expense.description.length > 30 && '...'}
+                </Text>
+              </Box>
+            )}
 
             <Box
               display="flex"
