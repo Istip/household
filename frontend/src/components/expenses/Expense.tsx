@@ -99,13 +99,18 @@ const Expense: React.FC<Props> = ({
             p={1}
             background={expense.amount >= 0 ? 'green.50' : 'red.50'}
           >
-            <Box color="gray.600" px={2} w="100px">
+            <Box color="gray.600" pl={2} w="105px">
               <i className="fa-solid fa-clock"></i>{' '}
               {dayjs(expense.createdAt).format('MMM DD, HH:mm')}
             </Box>
 
             {expense.description && (
-              <Box display="flex" justifyContent="center" alignItems="center">
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                pr={1}
+              >
                 <Text
                   fontSize="xx-small"
                   as="span"
@@ -122,12 +127,10 @@ const Expense: React.FC<Props> = ({
               display="flex"
               alignItems="center"
               justifyContent="space-between"
-              gap={2}
             >
               <Box>
                 <Box fontWeight="bold">{expense.amount}</Box>
               </Box>
-
               <Button
                 size="xs"
                 colorScheme="red"
