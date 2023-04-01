@@ -3,10 +3,10 @@ import {
   TabPanel,
   TabPanels,
   Tabs as TabsWrapper,
-} from '@chakra-ui/react';
-import { ItemsList, NotesList, ExpenseList } from '../';
-import { IExpense } from '../../interfaces/Expense';
-import TabIcons from './TabIcons';
+} from "@chakra-ui/react";
+import { ItemsList, NotesList, ExpenseList } from "../";
+import { IExpense } from "../../interfaces/Expense";
+import TabIcons from "./TabIcons";
 
 interface Props {
   tabIndex: number;
@@ -38,7 +38,7 @@ const Tabs: React.FC<Props> = ({
       </TabList>
 
       <TabPanels mt="72px">
-        <TabPanel>
+        <TabPanel bg="gray.100">
           <ItemsList />
         </TabPanel>
         <TabPanel bg="gray.100" minH="calc(100vh - 111px)">

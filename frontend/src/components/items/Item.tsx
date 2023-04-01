@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Avatar,
   Box,
@@ -9,10 +9,10 @@ import {
   EditablePreview,
   Text,
   useToast,
-} from '@chakra-ui/react';
-import { useItems } from '../../context/ItemContext';
-import { Item as IItem } from '../../interfaces/Item';
-import dayjs from 'dayjs';
+} from "@chakra-ui/react";
+import { useItems } from "../../context/ItemContext";
+import { Item as IItem } from "../../interfaces/Item";
+import dayjs from "dayjs";
 
 interface IProps {
   item: IItem;
@@ -36,23 +36,23 @@ const Item: React.FC<IProps> = ({ item }) => {
   const handleDelete = () => {
     toast({
       title: <Text fontSize="sm">Deleted: {name}</Text>,
-      position: 'top',
+      position: "top",
       isClosable: true,
-      status: 'success',
+      status: "success",
     });
 
     deleteItem(_id);
   };
 
   const handleUpdate = (name: string) => {
-    if (text !== item.name && text !== '') {
+    if (text !== item.name && text !== "") {
       const data = {
         name,
       };
       updateItem(_id, data);
     }
 
-    if (text === '') {
+    if (text === "") {
       handleDelete();
     }
   };
@@ -70,11 +70,12 @@ const Item: React.FC<IProps> = ({ item }) => {
       p={5}
       pb={3}
       border="1px solid"
-      borderRadius={10}
-      mb={2}
-      borderColor={completed ? 'white' : 'gray.200'}
-      opacity={completed ? '0.4' : '1'}
-      backgroundColor={completed ? 'white' : 'gray.50'}
+      borderRadius={12}
+      mb={4}
+      borderColor={completed ? "white" : "gray.200"}
+      opacity={completed ? "0.4" : "1"}
+      backgroundColor={completed ? "white" : "gray.50"}
+      boxShadow="lg"
     >
       <Box display="flex" justifyContent="space-between" alignItems="center">
         <Editable
@@ -113,7 +114,7 @@ const Item: React.FC<IProps> = ({ item }) => {
         <Box>
           {createdAt !== updatedAt && (
             <Text fontSize="xs" fontWeight="light" color="blue.300">
-              {editIcon} {dayjs(updatedAt).format('MMM DD, HH:mm')}
+              {editIcon} {dayjs(updatedAt).format("MMM DD, HH:mm")}
             </Text>
           )}
         </Box>
@@ -136,7 +137,7 @@ const Item: React.FC<IProps> = ({ item }) => {
             color="gray.400"
             mr={2}
           >
-            {dayjs(createdAt).format('MMM DD, HH:mm')}
+            {dayjs(createdAt).format("MMM DD, HH:mm")}
           </Text>
           <Avatar name={createdBy} size="2xs" fontWeight="bold" />
         </Box>
