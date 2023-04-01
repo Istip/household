@@ -1,8 +1,8 @@
-import { Avatar, Box, Button, Flex, Text } from '@chakra-ui/react';
-import { useState } from 'react';
-import { Comment as IComment, Note } from '../../interfaces/Note';
-import { useNotes } from '../../context/NotesContext';
-import dayjs from 'dayjs';
+import { Avatar, Box, Button, Flex, Text } from "@chakra-ui/react";
+import { useState } from "react";
+import { Comment as IComment, Note } from "../../interfaces/Note";
+import { useNotes } from "../../context/NotesContext";
+import dayjs from "dayjs";
 
 interface Props {
   note: Note;
@@ -52,7 +52,7 @@ const Comment: React.FC<Props> = ({ note, marked, comment, comments }) => {
           <Button
             w="100%"
             size="xs"
-            colorScheme={marked ? 'blackAlpha' : 'gray'}
+            colorScheme={marked ? "blackAlpha" : "gray"}
             isLoading={loading}
             onClick={() => setIsDelete(false)}
           >
@@ -88,11 +88,11 @@ const Comment: React.FC<Props> = ({ note, marked, comment, comments }) => {
       </Box>
       <Box
         fontSize="8px"
-        color={marked ? 'yellow.600' : 'gray.400'}
+        color={marked ? "yellow.600" : "gray.400"}
         minW="50px"
         opacity={isDelete ? 0 : 1}
       >
-        {dayjs(comment.createdAt).format('MMM DD, HH:mm')}
+        {dayjs(comment.createdAt).format("MMM DD, HH:mm")}
       </Box>
     </Flex>
   );
