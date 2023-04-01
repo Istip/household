@@ -7,6 +7,7 @@ import {
   Editable,
   EditableInput,
   EditablePreview,
+  Flex,
   Text,
   useToast,
 } from "@chakra-ui/react";
@@ -76,13 +77,33 @@ const Item: React.FC<IProps> = ({ item }) => {
       opacity={completed ? "0.4" : "1"}
       backgroundColor={completed ? "white" : "gray.50"}
       boxShadow="lg"
+      position="relative"
     >
-      <Box display="flex" justifyContent="space-between" alignItems="center">
+      <Flex
+        position="absolute"
+        top="5px"
+        left="5px"
+        alignItems="center"
+        gap={1}
+      >
+        <Avatar name={createdBy} size="xs" fontWeight="bold" />
+        <Box fontWeight="bold" fontSize="2xs" color="gray.400">
+          {createdBy}
+        </Box>
+      </Flex>
+
+      <Box
+        display="flex"
+        justifyContent="space-between"
+        alignItems="center"
+        pl={3}
+      >
         <Editable
           fontWeight="bold"
           defaultValue={name}
           onSubmit={() => handleUpdate(text)}
           selectAllOnFocus={false}
+          mt={1}
         >
           <EditablePreview />
           <EditableInput value={text} onChange={onChange} background="white" />
@@ -113,7 +134,7 @@ const Item: React.FC<IProps> = ({ item }) => {
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Box>
           {createdAt !== updatedAt && (
-            <Text fontSize="xs" fontWeight="light" color="blue.300">
+            <Text fontSize="2xs" fontWeight="light" color="blue.300">
               {editIcon} {dayjs(updatedAt).format("MMM DD, HH:mm")}
             </Text>
           )}
@@ -132,14 +153,13 @@ const Item: React.FC<IProps> = ({ item }) => {
 
           <Text
             alignSelf="center"
-            fontSize="xs"
+            fontSize="2xs"
             as="span"
             color="gray.400"
             mr={2}
           >
             {dayjs(createdAt).format("MMM DD, HH:mm")}
           </Text>
-          <Avatar name={createdBy} size="2xs" fontWeight="bold" />
         </Box>
       </Box>
     </Box>
