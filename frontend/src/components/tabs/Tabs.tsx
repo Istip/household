@@ -38,7 +38,7 @@ const Tabs: React.FC<Props> = ({
       </TabList>
 
       <TabPanels mt="72px">
-        <TabPanel bg="gray.100">
+        <TabPanel bg="gray.100" minH="calc(100vh - 111px)">
           <ItemsList />
         </TabPanel>
         <TabPanel bg="gray.100" minH="calc(100vh - 111px)">
