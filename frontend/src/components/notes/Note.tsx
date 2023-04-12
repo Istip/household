@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Avatar,
   Box,
@@ -8,11 +8,11 @@ import {
   Text,
   useDisclosure,
   useToast,
-} from '@chakra-ui/react';
-import { useNotes } from '../../context/NotesContext';
-import { Note as INote } from '../../interfaces/Note';
-import { Comments } from '../';
-import dayjs from 'dayjs';
+} from "@chakra-ui/react";
+import { useNotes } from "../../context/NotesContext";
+import { Note as INote } from "../../interfaces/Note";
+import { Comments } from "../";
+import dayjs from "dayjs";
 
 interface IProps {
   note: INote;
@@ -36,9 +36,9 @@ const Note: React.FC<IProps> = ({ note }) => {
   const handleDelete = () => {
     toast({
       title: <Text fontSize="sm">Deleted: {note.text}</Text>,
-      position: 'top',
+      position: "top",
       isClosable: true,
-      status: 'success',
+      status: "success",
     });
 
     deleteNote(_id);
@@ -58,10 +58,10 @@ const Note: React.FC<IProps> = ({ note }) => {
       p={5}
       borderRadius={12}
       mb={4}
-      backgroundColor={marked ? 'yellow.50' : 'white'}
+      backgroundColor={marked ? "twitter.50" : "white"}
       boxShadow="lg"
       border="1px solid"
-      borderColor={marked ? 'yellow.400' : 'gray.200'}
+      borderColor={marked ? "twitter.400" : "gray.200"}
       position="relative"
     >
       <Flex justifyContent="space-between" alignItems="center">
@@ -72,7 +72,7 @@ const Note: React.FC<IProps> = ({ note }) => {
               {clockIcon}
             </Text>
             <Text color="gray.500" fontSize="xs">
-              {dayjs(createdAt).format('MMMM DD HH:mm')}
+              {dayjs(createdAt).format("MMMM DD HH:mm")}
             </Text>
           </Box>
         </Box>
@@ -82,7 +82,7 @@ const Note: React.FC<IProps> = ({ note }) => {
               p={-1}
               mr={confirm ? 3 : 0}
               onClick={handleMark}
-              color={isMarked ? 'yellow.500' : 'gray.600'}
+              color={isMarked ? "twitter.500" : "gray.600"}
             >
               {bookmarkIcon}
             </Text>
@@ -94,7 +94,7 @@ const Note: React.FC<IProps> = ({ note }) => {
               )}
             </ScaleFade>
             <Text
-              color={confirm ? 'gray.600' : 'red.400'}
+              color={confirm ? "gray.600" : "red.400"}
               p={-1}
               onClick={() => {
                 onToggle();

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   Avatar,
   Box,
@@ -6,17 +6,17 @@ import {
   Input,
   InputGroup,
   InputLeftAddon,
-} from '@chakra-ui/react';
-import { Note } from '../../interfaces/Note';
-import { useNotes } from '../../context/NotesContext';
-import { useAuth } from '../../context/AuthContext';
-import Comment from './Comment';
+} from "@chakra-ui/react";
+import { Note } from "../../interfaces/Note";
+import { useNotes } from "../../context/NotesContext";
+import { useAuth } from "../../context/AuthContext";
+import Comment from "./Comment";
 
 const Comments: React.FC<{ note: Note; marked: boolean }> = ({
   note,
   marked,
 }) => {
-  const [comment, setComment] = useState('');
+  const [comment, setComment] = useState("");
 
   const { updateNote, loading } = useNotes();
   const { user } = useAuth();
@@ -26,7 +26,7 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
   const handleAddComment = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (comment !== '') {
+    if (comment !== "") {
       const data = {
         ...note,
         comments: [
@@ -41,7 +41,7 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
       updateNote(note._id, data);
     }
 
-    setComment('');
+    setComment("");
   };
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -53,7 +53,7 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
   return (
     <>
       <Box
-        bg={marked ? 'yellow.100' : 'gray.50'}
+        bg={marked ? "twitter.100" : "gray.50"}
         p={comments.length ? 1 : 0}
         pt={comments.length ? 2 : 0}
         borderRadius={comments.length ? 10 : 0}
@@ -89,7 +89,7 @@ const Comments: React.FC<{ note: Note; marked: boolean }> = ({
             size="xs"
             px={3}
             isLoading={loading}
-            colorScheme={note.marked ? 'blackAlpha' : 'gray'}
+            colorScheme={note.marked ? "blackAlpha" : "gray"}
           >
             Send
           </Button>
