@@ -87,7 +87,7 @@ const Item: React.FC<IProps> = ({ item }) => {
         gap={1}
       >
         <Avatar name={createdBy} size="xs" fontWeight="bold" />
-        <Box fontWeight="bold" fontSize="2xs" color="gray.400">
+        <Box fontWeight="bold" fontSize="xs" color="gray.400">
           {createdBy}
         </Box>
       </Flex>
@@ -134,7 +134,7 @@ const Item: React.FC<IProps> = ({ item }) => {
       <Box display="flex" alignItems="center" justifyContent="space-between">
         <Box>
           {createdAt !== updatedAt && (
-            <Text fontSize="2xs" fontWeight="light" color="blue.300">
+            <Text fontSize="xs" fontWeight="light" color="blue.300">
               {editIcon} {dayjs(updatedAt).format("MMM DD, HH:mm")}
             </Text>
           )}
@@ -153,7 +153,7 @@ const Item: React.FC<IProps> = ({ item }) => {
 
           <Text
             alignSelf="center"
-            fontSize="2xs"
+            fontSize="xs"
             as="span"
             color="gray.400"
             mr={2}
